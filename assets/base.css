@@ -3636,15 +3636,17 @@ body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z
     width: 100% !important;
     overflow: hidden !important;
     background:#000 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* You might need to adjust this */
   }
   body:has(.fy-hero-wrap) .fy-hero-video{
     width: 100% !important;
-    height: 65vh !important;
-    height: 65svh !important;
-    height: 65dvh !important;
+    height: 100% !important;
     object-fit: cover !important;
     object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
-    transform: none !important;
+    transform: scale(0.65) !important;
     background:#000 !important;
   }
   html, body{ overflow-x:hidden !important; background:#000 !important; }

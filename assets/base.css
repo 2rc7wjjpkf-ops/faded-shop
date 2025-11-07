@@ -3552,9 +3552,7 @@ details-disclosure > details {
   position: relative;
   width: 100vw;
   left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  transform: translateX(-50%);
   overflow: hidden;
   background: #000;
   z-index: 5;
@@ -3572,7 +3570,7 @@ details-disclosure > details {
   visibility: visible !important;
 }
 
-/* === MOBILE FIX (zentriert, rausgezoomt, kein Rand) === */
+/* === MOBILE FIX (zentriert, kein Rand) === */
 @media screen and (max-width: 768px) {
   .fy-hero-wrap {
     position: relative;
@@ -3586,12 +3584,10 @@ details-disclosure > details {
   }
 
   .fy-hero-video {
-    width: 120vw;                  /* leicht breiter, damit wirklich randlos */
-    height: 70vh;                  /* kompakter Hero auf Mobile */
+    width: 100vw;
+    height: 70vh;
     object-fit: cover;
-    object-position: 50% 15%;      /* leicht nach oben zentriert */
-    transform: translateX(-8%) scale(0.85); /* optisch mittig + rausgezoomt */
-    transform-origin: center center;
+    object-position: center center;
     background-color: #000;
     display: block;
     z-index: 10;

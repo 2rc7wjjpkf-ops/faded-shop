@@ -1,0 +1,99 @@
+<!-- === FADED YOUTH HERO VIDEO === -->
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #000 !important;
+  }
+
+  .fy-hero-wrap {
+    position: relative !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    background: #000 !important;
+  }
+
+  .fy-hero-video {
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
+    background: #000 !important;
+  }
+
+  @media (max-width: 749px) {
+    .fy-hero-video {
+      height: 75vh !important;
+      object-position: 50% 10% !important;
+    }
+  }
+{%- endstyle -%}
+
+<div class="fy-hero-wrap">
+  <video
+    class="fy-hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster="">
+    
+    <!-- Full HD (Mobile & Laptops) -->
+    <source
+      src="https://cdn.shopify.com/videos/c/o/v/93b7c4458e9c49729d499191514b2502.mp4"
+      type="video/mp4"
+      media="(max-width: 1280px)">
+    
+    <!-- 4K (Desktops & große Screens) -->
+    <source
+      src="https://cdn.shopify.com/videos/c/o/v/646852d06d884d6e988af8f7629106db.mp4"
+      type="video/mp4"
+      media="(min-width: 1281px)">
+      
+    Dein Browser unterstützt das Video-Tag nicht.
+  </video>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.fy-hero-video');
+    const path = window.location.pathname;
+
+    // Startseite -> Video sichtbar
+    if (path === '/' || path === '/de' || path === '/de/' || path === '/index' || path === '/index.html') {
+      if (video) {
+        video.style.display = 'block';
+        video.style.opacity = '1';
+        video.style.visibility = 'visible';
+        video.play().catch(() => {
+          video.muted = true;
+          video.play();
+        });
+      }
+    } 
+    // Alle anderen Seiten -> Video verstecken
+    else {
+      document.querySelectorAll('.fy-hero-wrap, .fy-hero-video').forEach(el => {
+        el.style.display = 'none';
+        el.style.opacity = '0';
+        el.style.visibility = 'hidden';
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FADED YOUTH Hero Video",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "FADED YOUTH Hero Video"
+    }
+  ]
+}
+{% endschema %}

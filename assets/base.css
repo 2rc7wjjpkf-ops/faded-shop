@@ -3785,7 +3785,7 @@ body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z
 
 /* 3) Fokuspunkte bequem steuerbar */
 :root{
-  --fy-focal-x: 50%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
+  --fy-focal-x: 48%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
   --fy-focal-y-desktop: 50%; /* 45% = etwas höher, 55% = etwas tiefer */
   --fy-focal-y-mobile: 50%;
 }
@@ -3817,9 +3817,9 @@ body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z
   }
   body:has(.fy-hero-wrap) .fy-hero-video{
     width: 100vw !important;
-    height: 80vh !important;
-    height: 80svh !important;
-    height: 80dvh !important;
+    height: 65vh !important;
+    height: 65svh !important;
+    height: 65dvh !important;
     object-fit: cover !important;
     object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
     transform: none !important;

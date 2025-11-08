@@ -97,3 +97,55 @@ document.addEventListener('DOMContentLoaded',()=>{
   "presets": [{ "name": "FADED YOUTH Hero Video" }]
 }
 {% endschema %}
+<style id="fy-hero-inline-fix">
+  /* ===== FADED YOUTH — NUCLEAR HERO FIX ===== */
+
+  /* 0) Falls der Wrapper eine ID fehlt, nimm #fy-hero ODER .fy-hero-wrap (beides wird abgedeckt) */
+  /* Full-bleed ohne :has() – funktioniert auch in Safari, clippt Überbreite */
+  #fy-hero, .fy-hero-wrap{
+    position: relative !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    /* zieht den Block aus jedem .page-width Padding raus → kein Rechts-Shift */
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    overflow: hidden !important;
+    background: #000 !important;
+    z-index: 0 !important;
+  }
+
+  /* Video zentriert, kein Seitenscroll */
+  #fy-hero video, .fy-hero-video{
+    display: block !important;
+    position: relative !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100vw !important;
+    height: 100svh !important;     /* stabiler als 100vh */
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
+    background: #000 !important;
+    z-index: 0 !important;
+  }
+
+  /* Mobile: mehr Szene sichtbar (~65% „rausgezoomt“), weiterhin mittig */
+  @media (max-width: 768px){
+    #fy-hero video, .fy-hero-video{
+      width: 150vw !important;                /* bewusst breiter */
+      height: 72svh !important;
+      transform: translateX(-50%) scale(0.65) !important; /* ~65% Zoom-Out */
+      transform-origin: center center !important;
+      object-position: 50% 50% !important;
+    }
+  }
+
+  /* Header bleibt über dem Video */
+  .section-header, .header, .shopify-section-header{
+    position: relative !important;
+    z-index: 99 !important;
+  }
+
+  /* absolut hart: horizontales Scrollen global aus */
+  html, body{ overflow-x: hidden !important; background:#000 !important; }
+</style>

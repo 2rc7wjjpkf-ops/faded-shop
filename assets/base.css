@@ -3725,3 +3725,73 @@ body.template-index .shopify-section-header {
 
 /* Falls der Hero irgendwo anders doch eingefügt würde: verstecken */
 body:not(.template-index) .fy-hero-wrap { display: none !important; }
+/* === FADED YOUTH — HERO HARD CENTER (Home only) === */
+/* Kein horizontaler Scroll – sicherheitshalber */
+html, body{ overflow-x:hidden !important; }
+
+/* Wrapper auf Full-bleed + feste Höhe */
+body.template-index .fy-hero-wrap{
+  position: relative !important;
+  width: 100vw !important;
+  height: 100svh !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #000 !important;
+  z-index: 0 !important;
+}
+
+/* Video ABSOLUT zentrieren – egal was das Theme macht */
+body.template-index .fy-hero-wrap video,
+body.template-index .fy-hero-video,
+body.template-index .fy-hero-wrap .deferred-media video,
+body.template-index .fy-hero-wrap .media video,
+body.template-index .content-for-index > .shopify-section:first-child video{
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+
+  /* Immer voll abdecken */
+  min-width: 100vw !important;
+  min-height: 100svh !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  background: #000 !important;
+  z-index: 0 !important;
+}
+
+/* Header sicher darüber (nur Home) */
+body.template-index .section-header,
+body.template-index .header,
+body.template-index .shopify-section-header{
+  position: relative !important;
+  z-index: 99 !important;
+}
+
+/* --- Mobile: ~65% „rausgezoomt“, trotzdem exakt mittig --- */
+@media (max-width: 768px){
+  body.template-index .fy-hero-wrap{
+    height: 72svh !important;
+  }
+  body.template-index .fy-hero-wrap video,
+  body.template-index .fy-hero-video,
+  body.template-index .fy-hero-wrap .deferred-media video,
+  body.template-index .fy-hero-wrap .media video,
+  body.template-index .content-for-index > .shopify-section:first-child video{
+    /* 154vw * 0.65 ≈ 100vw → mehr Bild ohne Seitenscroll */
+    min-width: 154vw !important;
+    min-height: 72svh !important;
+    transform: translate(-50%, -50%) scale(0.65) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* Falls Hero aus Versehen auf anderen Seiten auftaucht → ausblenden */
+body:not(.template-index) .fy-hero-wrap{ display:none !important; }

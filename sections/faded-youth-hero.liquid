@@ -1,56 +1,71 @@
-<style>
-  /* === INLINE CSS FÜR FINALE HÖHEN- & BREITENKORREKTUR === */
-  
-  /* Container wird absolut positioniert, um Header-Margins zu ignorieren */
-  .fy-hero-wrapper {
-    position: absolute !important; /* Absolut, um über/unter den Flow zu gehen */
-    top: 0 !important;             /* Zieht es ganz nach oben */
-    left: 0 !important;
-    right: 0 !important;
-    
-    height: 100vh !important;
-    height: 100svh !important; /* iOS Safari Fix */
-    width: 100% !important;
-    
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #000 !important;
-    overflow: hidden !important;
-    z-index: 1 !important; /* Bleibt unter dem Header (z-index 99) */
-  }
-
-  .fy-hero-video {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* Füllt den Wrapper randlos */
-    object-position: 50% 50% !important;
-    background: #000 !important;
-  }
-  
-  /* --- Mobile Zoom (65% Rauszoomen) --- */
-  @media screen and (max-width: 768px) {
-    .fy-hero-video {
-      /* Skaliert das Video für den gewünschten "Rauszoomen"-Effekt */
-      transform: scale(0.65) !important; 
-      transform-origin: center center !important;
-    }
-  }
-
-  /* WICHTIG: Setzt das Haupt-Content-Padding zurück, damit der Rest der Seite bündig anfängt */
-  .content-for-index > section {
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
-  }
-</style>
-
-{% comment %} 
-Der Header (in header.liquid) muss einen z-index von 99+ haben, damit die Klicks funktionieren.
-Das wurde in der base.css bereits implementiert.
+{% comment %}
+  FADED YOUTH HERO VIDEO SECTION
+  Finaler Fix: Absolute Positionierung, um Header-Margin zu ignorieren und volle Höhe zu erzwingen.
 {% endcomment %}
 
+<style>
+/* ABSOLUTE POSITIONIERUNG: Zwingt das Video, ganz oben anzufangen (ignoriert Header-Margin) */
+.fy-hero-wrap {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100svh !important; /* iOS Safari Fix */
+  overflow: hidden !important;
+  z-index: 1 !important; /* Wichtig: MUSS HÖHER sein als Standard-Content, aber NIEDRIGER als Header (99999) */
+}
+
+/* Video-Element selbst */
+.fy-hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+}
+
+/* Header Klick-Fix: Nur nötig, falls der allgemeine z-index nicht greift */
+.shopify-section-header, 
+.header--top,
+header.header {
+  z-index: 99999 !important; /* MUSS über dem Video (1) liegen */
+  position: relative !important; /* Nötig, damit z-index wirkt */
+}
+
+
+/* --- Mobile Zoom Out (65%) --- */
+@media (max-width: 768px) {
+  .fy-hero-wrap {
+    /* Full width auf Mobile */
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    
+    /* Mobile Ränder und Scroll verhindern */
+    overflow-x: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .fy-hero-video {
+    /* Skalierung und Positionierung für "Mann in der Mitte" */
+    transform: scale(0.65) !important; 
+    transform-origin: center center !important;
+  }
+
+  /* Globaler Reset für Body/HTML */
+  body, html {
+    overflow-x: hidden !important;
+  }
+}
+
+</style>
+
 {% if template.name == 'index' %}
-  <div class="fy-hero-wrapper">
+  <div class="fy-hero-wrap">
     <video 
       class="fy-hero-video"
       autoplay
@@ -59,10 +74,8 @@ Das wurde in der base.css bereits implementiert.
       playsinline
       preload="auto">
       
-      <!-- Full HD -->
+      <!-- Video Quellen, wie von dir bereitgestellt -->
       <source src="https://cdn.shopify.com/videos/c/o/v/93b7c4458e9c49729d499191514b2502.mp4" type="video/mp4" media="(max-width:1280px)">
-      
-      <!-- 4K -->
       <source src="https://cdn.shopify.com/videos/c/o/v/646852d06d884d6e988af8f7629106db.mp4" type="video/mp4" media="(min-width:1281px)">
     </video>
   </div>
@@ -79,7 +92,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 {
   "name": "FADED YOUTH Hero Video",
   "tag": "section",
-  "class": "section fy-hero-section",
+  "class": "section",
   "settings": [],
   "presets": [{ "name": "FADED YOUTH Hero Video" }]
 }

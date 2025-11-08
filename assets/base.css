@@ -3666,3 +3666,47 @@ body.template-index .fy-hero-video{
 
 /* Falls der Hero irgendwo anders auftaucht: ausblenden */
 body:not(.template-index) .fy-hero-wrap { display: none !important; }
+/* === FADED YOUTH — HERO LAYOUT (kompakt, stabil) === */
+html, body { overflow-x: hidden !important; }
+
+.fy-hero-wrap{
+  position: relative !important;
+  width: 100vw !important;
+  height: 100svh !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  overflow: hidden !important;
+  background: #000 !important;
+  z-index: 0 !important;
+}
+
+.fy-hero-video{
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+
+  /* „Cover“, aber ohne Objekt-Fit-Bugs */
+  min-width: 100vw !important;
+  min-height: 100svh !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  background: #000 !important;
+}
+
+@media (max-width: 768px){
+  .fy-hero-wrap{ height: 72svh !important; }
+  .fy-hero-video{
+    /* 65% „rausgezoomt“ → mehr Szene, weiterhin mittig */
+    min-width: 154vw !important; /* 100 / 0.65 ≈ 154 */
+    min-height: 72svh !important;
+    transform: translate(-50%, -50%) scale(0.65) !important;
+    transform-origin: center center !important;
+  }
+}
+/* === END HERO === */

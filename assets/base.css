@@ -3617,15 +3617,19 @@ body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z
 
 /* 3) Desktop: echtes Center + robuste VH-Units */
 @media (min-width: 769px){
+  body:has(.fy-hero-wrap) .fy-hero-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   body:has(.fy-hero-wrap) .fy-hero-video{
     width: 100% !important;
-    height: 100vh !important;
-    height: 100svh !important;  /* iOS Safari fix */
-    height: 100dvh !important;  /* neuere Browser */
+    height: auto !important;
     object-fit: cover !important;
     object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
     transform: none !important;
     background:#000 !important;
+    max-width: var(--page-width);
   }
 }
 
@@ -3639,14 +3643,13 @@ body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh; /* You might need to adjust this */
   }
   body:has(.fy-hero-wrap) .fy-hero-video{
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     object-fit: cover !important;
     object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
-    transform: scale(0.65) !important;
+    transform: none !important;
     background:#000 !important;
   }
   html, body{ overflow-x:hidden !important; background:#000 !important; }

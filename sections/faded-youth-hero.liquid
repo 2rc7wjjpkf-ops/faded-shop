@@ -1,5 +1,49 @@
+<style>
+  /* === INLINE CSS FÜR BREITEN FIX === */
+  /* Neutralisiert äußere Abstände und zieht das Video nach oben */
+  .fy-hero-wrapper {
+    /* WICHTIG: Setzt die Höhe auf 100% und entfernt alle Ränder */
+    height: 100vh !important;
+    height: 100svh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important; 
+    position: relative !important;
+    z-index: 1 !important; /* Unter dem Header */
+  }
+
+  .fy-hero-video {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
+    background: #000 !important;
+  }
+  
+  /* --- Mobile Zoom (65% Rauszoomen) & Bündigkeits-Fix --- */
+  @media screen and (max-width: 768px) {
+    /* Nullt die Breitenbegrenzung der Shopify-Standard-Wrapper */
+    .shopify-section-main-content,
+    #main-content,
+    .main-content,
+    .content-for-index {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .fy-hero-video {
+      /* Skaliert das Video für den gewünschten "Rauszoomen"-Effekt */
+      transform: scale(0.65) !important; 
+      transform-origin: center center !important;
+      height: 90vh !important; /* Etwas kleiner als 100vh für mehr Stabilität */
+    }
+  }
+</style>
+
 {% if template.name == 'index' %}
-  <div class="fy-hero-wrap page-width">
+  <div class="fy-hero-wrapper">
     <video 
       class="fy-hero-video"
       autoplay
@@ -28,7 +72,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 {
   "name": "FADED YOUTH Hero Video",
   "tag": "section",
-  "class": "section",
+  "class": "section fy-hero-section",
   "settings": [],
   "presets": [{ "name": "FADED YOUTH Hero Video" }]
 }

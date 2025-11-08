@@ -309,7 +309,13 @@
 
   {% sections 'header-group' %}
 {% if template.name == 'index' %}
- 
+  <section id="fy-hero">
+    <video autoplay muted loop playsinline preload="metadata" poster="">
+      <source src="https://cdn.shopify.com/videos/c/o/v/93b7c4458e9c49729d499191514b2502.mp4" type="video/mp4" media="(max-width:1280px)">
+      <source src="https://cdn.shopify.com/videos/c/o/v/646852d06d884d6e988af8f7629106db.mp4" type="video/mp4" media="(min-width:1281px)">
+      Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+  </section>
 {% endif %}
 
 <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">

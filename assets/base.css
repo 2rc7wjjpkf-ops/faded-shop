@@ -3596,17 +3596,18 @@ details-disclosure > details {
   --shadow-opacity: var(--media-shadow-opacity);
   --shadow-visible: var(--media-shadow-visible);
 }
-/* ===== FADED YOUTH — HERO ABSOLUTE CENTER V4 ===== */
+/* ===== FADED YOUTH — HERO ABSOLUTE CENTER (FINAL) ===== */
+
+/* Debug-Parameter (bei Bedarf feinjustieren) */
 :root{
   --fy-mobile-zoom: .65;       /* ~65% rausgezoomt auf Mobile */
-  --fy-focal-x: 50%;           /* 48%/52% = leicht links/rechts schieben */
-  --fy-focal-y-desktop: 50%;   /* 45%/55% = höher/tiefer (Desktop) */
-  --fy-focal-y-mobile: 50%;    /* höher/tiefer (Mobile) */
+  --fy-shift-x: 0%;            /* Feinschub nach links/rechts (-3% / +3%) */
+  --fy-shift-y: 0%;            /* Feinschub nach oben/unten */
 }
 
-/* Nie wieder Horizontal-Scroll */
+/* Horizontal-Scroll komplett verhindern (sicher) */
 html, body,
-.content-for-index, .shopify-section, .page-width{ overflow-x: hidden !important; }
+.content-for-index, .shopify-section, .page-width { overflow-x: hidden !important; }
 
 /* Full-bleed Wrapper */
 .fy-hero-wrap{
@@ -3621,27 +3622,39 @@ html, body,
   z-index: 0 !important;
 }
 
-/* Video: absolut zentriert, füllt den Wrapper */
-.fy-hero-wrap > video,
+/* Alle Shopify-Media-Wrappers im Hero neutralisieren */
+.fy-hero-wrap .media,
+.fy-hero-wrap .global-media-settings{
+  position: static !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: visible !important;
+}
+
+/* Video: absolute Mitte + „cover“ ohne object-fit-Bugs */
+.fy-hero-wrap video,
 .fy-hero-video{
   position: absolute !important;
-  inset: 0 !important;                     /* top/right/bottom/left = 0 */
-  margin: 0 !important;
+  top: 50% !important;
+  left: 50% !important;
 
-  /* Füllt den Container */
-  width: 100% !important;
-  height: 100% !important;
-  max-width: none !important;
+  /* Cover-Pattern ohne object-fit: cover Abweichungen */
   min-width: 100% !important;
   min-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
 
-  object-fit: cover !important;
-  object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
-
-  transform: none !important;              /* killt alte Transforms */
+  transform: translate(calc(-50% + var(--fy-shift-x)), calc(-50% + var(--fy-shift-y))) !important;
   transform-origin: center center !important;
-  background: #000 !important;
+
+  background:#000 !important;
+  margin: 0 !important;
   z-index: 0 !important;
+
+  /* Für Browser, die damit besser fahren, trotzdem setzen */
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
 }
 
 /* Header sicher oben */
@@ -3650,28 +3663,14 @@ html, body,
   z-index: 99 !important;
 }
 
-/* Mobile: „Zoom-Out“ (~65%) aber weiterhin exakt mittig */
+/* Mobile: „Zoom-Out“ (~65%) bei identischer Zentrierung */
 @media (max-width: 768px){
-  .fy-hero-wrap{
-    height: 72svh !important;              /* angenehme Höhe auf Mobile */
-  }
+  .fy-hero-wrap{ height: 72svh !important; }
 
-  .fy-hero-wrap > video,
+  .fy-hero-wrap video,
   .fy-hero-video{
-    /* 1) Erst größer machen … */
-    width: calc(100% / var(--fy-mobile-zoom)) !important;
-    height: calc(100% / var(--fy-mobile-zoom)) !important;
-    max-width: none !important;
-    min-width: 0 !important;               /* verhindert 100%-Clamping */
-
-    /* 2) … dann um die Mitte auf Wrapper-Größe runterskalieren */
-    top: 50% !important;
-    left: 50% !important;
-    inset: auto !important;                 /* überschreibt das oben */
-    transform: translate(-50%, -50%) scale(var(--fy-mobile-zoom)) !important;
-    transform-origin: center center !important;
-
-    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
-    background:#000 !important;
+    /* größer rendern und dann zentriert runterskalieren */
+    transform: translate(calc(-50% + var(--fy-shift-x)), calc(-50% + var(--fy-shift-y))) 
+               scale(var(--fy-mobile-zoom)) !important;
   }
 }

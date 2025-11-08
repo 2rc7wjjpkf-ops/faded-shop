@@ -9,9 +9,13 @@
     >
       {% if section.settings.mobile_video_url %}
         <source src="{{ section.settings.mobile_video_url }}" type="video/mp4" media="(max-width: 768px)">
+      {% else %}
+        <source src="https://cdn.shopify.com/videos/c/o/v/e4a19337a343467f9380b4a4d6f3add1.mp4" type="video/mp4" media="(max-width: 768px)">
       {% endif %}
       {% if section.settings.desktop_video_url %}
         <source src="{{ section.settings.desktop_video_url }}" type="video/mp4">
+      {% else %}
+        <source src="https://cdn.shopify.com/videos/c/o/v/e4a19337a343467f9380b4a4d6f3add1.mp4" type="video/mp4">
       {% endif %}
     </video>
   </div>
@@ -44,6 +48,8 @@
   .fy-hero-wrap{ height:72dvh; }
   .fy-hero-media video{
     transform:translate(-50%,-50%) scale(.65);
+    min-width: 154vw; /* 100vw / 0.65 */
+    min-height: 154vh; /* 100vh / 0.65 */
   }
 }
 

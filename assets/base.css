@@ -3596,140 +3596,20 @@ details-disclosure > details {
   --shadow-opacity: var(--media-shadow-opacity);
   --shadow-visible: var(--media-shadow-visible);
 }
-/* ===== FADED YOUTH — HERO ABSOLUTE CENTER (FINAL) ===== */
+/* === FADED YOUTH — HERO (HOME ONLY, COMPACT FINAL) === */
 
-/* Debug-Parameter (bei Bedarf feinjustieren) */
-:root{
-  --fy-mobile-zoom: .65;       /* ~65% rausgezoomt auf Mobile */
-  --fy-shift-x: 0%;            /* Feinschub nach links/rechts (-3% / +3%) */
-  --fy-shift-y: 0%;            /* Feinschub nach oben/unten */
-}
-
-/* Horizontal-Scroll komplett verhindern (sicher) */
-html, body,
-.content-for-index, .shopify-section, .page-width { overflow-x: hidden !important; }
-
-/* Full-bleed Wrapper */
-.fy-hero-wrap{
-  position: relative !important;
-  width: 100vw !important;
-  height: 100svh !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  background: #000 !important;
-  z-index: 0 !important;
-}
-
-/* Alle Shopify-Media-Wrappers im Hero neutralisieren */
-.fy-hero-wrap .media,
-.fy-hero-wrap .global-media-settings{
-  position: static !important;
-  padding: 0 !important;
-  border: 0 !important;
-  overflow: visible !important;
-}
-
-/* Video: absolute Mitte + „cover“ ohne object-fit-Bugs */
-.fy-hero-wrap video,
-.fy-hero-video{
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-
-  /* Cover-Pattern ohne object-fit: cover Abweichungen */
-  min-width: 100% !important;
-  min-height: 100% !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: none !important;
-
-  transform: translate(calc(-50% + var(--fy-shift-x)), calc(-50% + var(--fy-shift-y))) !important;
-  transform-origin: center center !important;
-
-  background:#000 !important;
-  margin: 0 !important;
-  z-index: 0 !important;
-
-  /* Für Browser, die damit besser fahren, trotzdem setzen */
-  object-fit: cover !important;
-  object-position: 50% 50% !important;
-}
-
-/* Header sicher oben */
-.section-header, .header, .shopify-section-header{
-  position: relative !important;
-  z-index: 99 !important;
-}
-
-/* Mobile: „Zoom-Out“ (~65%) bei identischer Zentrierung */
-@media (max-width: 768px){
-  .fy-hero-wrap{ height: 72svh !important; }
-
-  .fy-hero-wrap video,
-  .fy-hero-video{
-    /* größer rendern und dann zentriert runterskalieren */
-    transform: translate(calc(-50% + var(--fy-shift-x)), calc(-50% + var(--fy-shift-y))) 
-               scale(var(--fy-mobile-zoom)) !important;
-  }
-}
-/* === FY HERO — NUR STARTSEITE === */
-
-/* Sicherheitsnetz: niemals X-Scroll */
+/* Sicherheit: kein horizontaler Scroll */
 html, body { overflow-x: hidden !important; }
 
-/* Alles, was den Hero betrifft, NUR auf Home */
-body.template-index .content-for-index > .shopify-section:first-child {
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  background: #000 !important;
-}
-
-body.template-index .content-for-index > .shopify-section:first-child video,
-body.template-index .fy-hero-wrap > video,
-body.template-index .fy-hero-video {
-  display: block !important;
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 100vw !important;
-  height: 100svh !important;
-  object-fit: cover !important;
-  object-position: 50% 50% !important;
-  background: #000 !important;
-  z-index: 0 !important;
-}
-
-/* Mobile: ~65% Zoom-Out, weiterhin mittig */
-@media (max-width: 768px){
-  body.template-index .content-for-index > .shopify-section:first-child video,
-  body.template-index .fy-hero-wrap > video,
-  body.template-index .fy-hero-video {
-    width: 154vw !important;                 /* 100 / 0.65 ≈ 154 */
-    height: 72svh !important;
-    transform: translateX(-50%) scale(0.65) !important;
-    transform-origin: center center !important;
-  }
-}
-
-/* Header bleibt drüber – nur Home */
+/* Header bleibt über dem Video (nur Home) */
 body.template-index .section-header,
 body.template-index .header,
 body.template-index .shopify-section-header {
   position: relative !important;
-  z-index: 99 !important;
+  z-index: 100 !important;
 }
 
-/* Falls der Hero irgendwo anders doch eingefügt würde: verstecken */
-body:not(.template-index) .fy-hero-wrap { display: none !important; }
-/* === FADED YOUTH — HERO HARD CENTER (Home only) === */
-/* Kein horizontaler Scroll – sicherheitshalber */
-html, body{ overflow-x:hidden !important; }
-
-/* Wrapper auf Full-bleed + feste Höhe */
+/* Full-bleed Hero-Wrapper (nur Home) */
 body.template-index .fy-hero-wrap{
   position: relative !important;
   width: 100vw !important;
@@ -3738,22 +3618,27 @@ body.template-index .fy-hero-wrap{
   margin-right: calc(50% - 50vw) !important;
   padding: 0 !important;
   overflow: hidden !important;
-  background: #000 !important;
+  background:#000 !important;
   z-index: 0 !important;
 }
 
-/* Video ABSOLUT zentrieren – egal was das Theme macht */
+/* Dawn-Media-Hüllen im Hero neutralisieren */
+body.template-index .fy-hero-wrap .media,
+body.template-index .fy-hero-wrap .global-media-settings{
+  position: static !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: visible !important;
+}
+
+/* Video absolut zentrieren + „cover“ */
 body.template-index .fy-hero-wrap video,
-body.template-index .fy-hero-video,
-body.template-index .fy-hero-wrap .deferred-media video,
-body.template-index .fy-hero-wrap .media video,
-body.template-index .content-for-index > .shopify-section:first-child video{
+body.template-index .fy-hero-video{
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
 
-  /* Immer voll abdecken */
   min-width: 100vw !important;
   min-height: 100svh !important;
   width: auto !important;
@@ -3763,35 +3648,21 @@ body.template-index .content-for-index > .shopify-section:first-child video{
 
   object-fit: cover !important;
   object-position: 50% 50% !important;
-  background: #000 !important;
+  background:#000 !important;
   z-index: 0 !important;
 }
 
-/* Header sicher darüber (nur Home) */
-body.template-index .section-header,
-body.template-index .header,
-body.template-index .shopify-section-header{
-  position: relative !important;
-  z-index: 99 !important;
-}
-
-/* --- Mobile: ~65% „rausgezoomt“, trotzdem exakt mittig --- */
+/* Mobile: ~65% rausgezoomt, trotzdem exakt mittig */
 @media (max-width: 768px){
-  body.template-index .fy-hero-wrap{
-    height: 72svh !important;
-  }
+  body.template-index .fy-hero-wrap{ height: 72svh !important; }
   body.template-index .fy-hero-wrap video,
-  body.template-index .fy-hero-video,
-  body.template-index .fy-hero-wrap .deferred-media video,
-  body.template-index .fy-hero-wrap .media video,
-  body.template-index .content-for-index > .shopify-section:first-child video{
-    /* 154vw * 0.65 ≈ 100vw → mehr Bild ohne Seitenscroll */
-    min-width: 154vw !important;
+  body.template-index .fy-hero-video{
+    min-width: 154vw !important;      /* 100 / 0.65 ≈ 154 */
     min-height: 72svh !important;
     transform: translate(-50%, -50%) scale(0.65) !important;
     transform-origin: center center !important;
   }
 }
 
-/* Falls Hero aus Versehen auf anderen Seiten auftaucht → ausblenden */
-body:not(.template-index) .fy-hero-wrap{ display:none !important; }
+/* Falls der Hero irgendwo anders auftaucht: ausblenden */
+body:not(.template-index) .fy-hero-wrap { display: none !important; }

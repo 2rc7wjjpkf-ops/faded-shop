@@ -3596,102 +3596,35 @@ details-disclosure > details {
   --shadow-opacity: var(--media-shadow-opacity);
   --shadow-visible: var(--media-shadow-visible);
 }
-/* =========================================================
-   FADED YOUTH — HERO HARD FIX (append-only)
-   ========================================================= */
-
-/* Full-bleed: keine Seiteneinzüge rund um den Hero */
-body:has(.fy-hero-wrap) .page-width:has(.fy-hero-wrap){ 
-  max-width:100vw!important; 
-  padding:0!important; 
-}
-body:has(.fy-hero-wrap) .shopify-section:has(.fy-hero-wrap){
-  margin:0!important;
-}
-
-/* Wrapper: zentriert + clippt Überbreite, damit kein horizontaler Scroll */
-.fy-hero-wrap{
-  position:relative!important;
-  width:100vw!important;
-  left:50%!important;
-  transform:translateX(-50%)!important;
-  margin:0!important;
-  overflow:hidden!important;
-  background:#000!important;
-  z-index:0!important;
-}
-
-/* Desktop: echte Mitte, volle Höhe */
-.fy-hero-video{
-  display:block!important;
-  position:relative!important;
-  width:100vw!important;
-  height:100svh!important;
-  object-fit:cover!important;
-  object-position:50% 50%!important;
-  transform:none!important;
-  background:#000!important;
-  z-index:0!important;
-}
-
-/* Mobile: mittig + ~65% “rausgezoomt” (mehr Szene sichtbar),
-   Überbreite wird vom Wrapper weggeclippt – kein Seitenscroll */
-@media (max-width:768px){
-  .fy-hero-video{
-    position:relative!important;
-    left:50%!important;
-    width:150vw!important;              /* Layout-Breite > 100vw */
-    height:72svh!important;
-    transform:translateX(-50%) scale(.65)!important; /* effektiv ~65% */
-    transform-origin:center center!important;
-    object-position:50% 50%!important;
-  }
-
-  html,body{ 
-    overflow-x:hidden!important; 
-    background:#000!important; 
-  }
-}
-
-/* Header sicher über Video */
-body:has(.fy-hero-wrap) .header,
-body:has(.fy-hero-wrap) .shopify-section-header{
-  position:relative!important;
-  z-index:99!important;
-}
-/* ===== FADED YOUTH — FINAL HERO OVERRIDE (no :has, no leaks) ===== */
+/* ===== FADED YOUTH — HERO (single final block to paste at END of base.css) ===== */
 
 /* 0) Nie wieder Horizontal-Scroll */
 html, body { overflow-x: hidden !important; }
 .content-for-index, .shopify-section, .page-width { overflow-x: hidden !important; }
 
-/* 1) Full-bleed Wrapper neutralisiert jedes page-width-Padding */
-.page-width .fy-hero-wrap,
-.shopify-section .fy-hero-wrap {
+/* 1) Full-bleed Wrapper — unabhängig von page-width-Padding */
+.fy-hero-wrap{
   position: relative !important;
   width: 100vw !important;
-
-  /* zieht den Block aus jedem Container-Padding raus */
   margin-left: calc(50% - 50vw) !important;
   margin-right: calc(50% - 50vw) !important;
-
   padding: 0 !important;
   overflow: hidden !important;
   background: #000 !important;
   z-index: 0 !important;
 }
 
-/* 2) Video wirklich zentriert (kein Rand, kein Rechts-Shift) */
+/* 2) Video perfekt mittig, kein Rechts-Shift */
 .fy-hero-video,
-.fy-hero-wrap > video {
+.fy-hero-wrap > video{
   display: block !important;
   position: relative !important;
-
   left: 50% !important;
   transform: translateX(-50%) !important;
 
   width: 100vw !important;
-  height: 100svh !important;
+  height: 100vh !important;   /* Fallback */
+  height: 100svh !important;  /* stabiles Viewport-Height */
 
   object-fit: cover !important;
   object-position: 50% 50% !important;
@@ -3699,21 +3632,25 @@ html, body { overflow-x: hidden !important; }
   z-index: 0 !important;
 }
 
-/* 3) Header bleibt sicher oben */
-.section-header, .header, .shopify-section-header {
+/* 3) Header zuverlässig über dem Video */
+.section-header, .header, .shopify-section-header{
   position: relative !important;
   z-index: 99 !important;
 }
 
-/* 4) Mobile: ~65% „rausgezoomt“ = mehr Szene sichtbar, trotzdem mittig */
+/* 4) Mobile: ~65% „rausgezoomt“ (mehr Szene sichtbar), trotzdem mittig */
 @media (max-width: 768px){
+  :root{ --fy-zoom: .65; } /* 65% sichtbar (Zoom-Out) */
+
   .fy-hero-video,
   .fy-hero-wrap > video{
-    /* breiter + scale → effektiv ~65% Zoom-Out, ohne seitlichen Scroll */
-    width: 154vw !important;                 /* 100 / 0.65 ≈ 153.85 */
+    width: calc(100vw / var(--fy-zoom)) !important;   /* ≈154vw */
     height: 72svh !important;
-    transform: translateX(-50%) scale(0.65) !important;
+    transform: translateX(-50%) scale(var(--fy-zoom)) !important;
     transform-origin: center center !important;
     object-position: 50% 50% !important;
   }
 }
+
+
+   

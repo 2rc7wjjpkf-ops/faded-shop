@@ -1,46 +1,53 @@
 <style>
-  /* === INLINE CSS FÜR BREITEN FIX === */
-  /* Neutralisiert äußere Abstände und zieht das Video nach oben */
+  /* === INLINE CSS FÜR FINALE HÖHEN- & BREITENKORREKTUR === */
+  
+  /* Container wird absolut positioniert, um Header-Margins zu ignorieren */
   .fy-hero-wrapper {
-    /* WICHTIG: Setzt die Höhe auf 100% und entfernt alle Ränder */
+    position: absolute !important; /* Absolut, um über/unter den Flow zu gehen */
+    top: 0 !important;             /* Zieht es ganz nach oben */
+    left: 0 !important;
+    right: 0 !important;
+    
     height: 100vh !important;
-    height: 100svh !important;
+    height: 100svh !important; /* iOS Safari Fix */
+    width: 100% !important;
+    
     margin: 0 !important;
     padding: 0 !important;
-    width: 100% !important; 
-    position: relative !important;
-    z-index: 1 !important; /* Unter dem Header */
+    background: #000 !important;
+    overflow: hidden !important;
+    z-index: 1 !important; /* Bleibt unter dem Header (z-index 99) */
   }
 
   .fy-hero-video {
     display: block !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
+    object-fit: cover !important; /* Füllt den Wrapper randlos */
     object-position: 50% 50% !important;
     background: #000 !important;
   }
   
-  /* --- Mobile Zoom (65% Rauszoomen) & Bündigkeits-Fix --- */
+  /* --- Mobile Zoom (65% Rauszoomen) --- */
   @media screen and (max-width: 768px) {
-    /* Nullt die Breitenbegrenzung der Shopify-Standard-Wrapper */
-    .shopify-section-main-content,
-    #main-content,
-    .main-content,
-    .content-for-index {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-      max-width: 100% !important;
-    }
-
     .fy-hero-video {
       /* Skaliert das Video für den gewünschten "Rauszoomen"-Effekt */
       transform: scale(0.65) !important; 
       transform-origin: center center !important;
-      height: 90vh !important; /* Etwas kleiner als 100vh für mehr Stabilität */
     }
   }
+
+  /* WICHTIG: Setzt das Haupt-Content-Padding zurück, damit der Rest der Seite bündig anfängt */
+  .content-for-index > section {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+  }
 </style>
+
+{% comment %} 
+Der Header (in header.liquid) muss einen z-index von 99+ haben, damit die Klicks funktionieren.
+Das wurde in der base.css bereits implementiert.
+{% endcomment %}
 
 {% if template.name == 'index' %}
   <div class="fy-hero-wrapper">

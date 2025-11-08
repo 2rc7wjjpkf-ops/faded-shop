@@ -3596,61 +3596,68 @@ details-disclosure > details {
   --shadow-opacity: var(--media-shadow-opacity);
   --shadow-visible: var(--media-shadow-visible);
 }
-/* ===== FADED YOUTH — HERO (single final block to paste at END of base.css) ===== */
+/* ===== FADED YOUTH — HERO CENTER V3 (Grid, bulletproof) ===== */
+:root{
+  --fy-mobile-zoom: .65;     /* 0.65 = ~65% rausgezoomt */
+  --fy-focal-x: 50%;         /* Fokus horizontal (z.B. 48%/52%) */
+  --fy-focal-y: 50%;         /* Fokus vertikal   (z.B. 45%/55%) */
+}
 
-/* 0) Nie wieder Horizontal-Scroll */
-html, body { overflow-x: hidden !important; }
-.content-for-index, .shopify-section, .page-width { overflow-x: hidden !important; }
+/* Nie wieder Horizontal-Scroll */
+html, body,
+.content-for-index, .shopify-section, .page-width{ overflow-x:hidden !important; }
 
-/* 1) Full-bleed Wrapper — unabhängig von page-width-Padding */
+/* Full-bleed Wrapper – neutralisiert page-width, zentriert via Grid */
 .fy-hero-wrap{
-  position: relative !important;
-  width: 100vw !important;
   margin-left: calc(50% - 50vw) !important;
   margin-right: calc(50% - 50vw) !important;
-  padding: 0 !important;
+  width: 100vw !important;
+  height: 100svh !important;
+
+  display: grid !important;
+  place-items: center !important;
+
   overflow: hidden !important;
   background: #000 !important;
   z-index: 0 !important;
 }
 
-/* 2) Video perfekt mittig, kein Rechts-Shift */
+/* Video: 100% Viewport, echte Mitte, keine seitlichen Offsets */
 .fy-hero-video,
 .fy-hero-wrap > video{
   display: block !important;
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  position: static !important;          /* entfernt left/right Effekte */
+  left: auto !important; right: auto !important; top: auto !important;
 
   width: 100vw !important;
-  height: 100vh !important;   /* Fallback */
-  height: 100svh !important;  /* stabiles Viewport-Height */
+  height: 100svh !important;
 
   object-fit: cover !important;
-  object-position: 50% 50% !important;
+  object-position: var(--fy-focal-x) var(--fy-focal-y) !important;
+
+  transform: none !important;
+  transform-origin: center center !important;
   background: #000 !important;
   z-index: 0 !important;
 }
 
-/* 3) Header zuverlässig über dem Video */
+/* Header sicher oben */
 .section-header, .header, .shopify-section-header{
   position: relative !important;
   z-index: 99 !important;
 }
 
-/* 4) Mobile: ~65% „rausgezoomt“ (mehr Szene sichtbar), trotzdem mittig */
+/* Mobile: ~65% rausgezoomt (mehr Szene sichtbar), trotzdem perfekt mittig */
 @media (max-width: 768px){
-  :root{ --fy-zoom: .65; } /* 65% sichtbar (Zoom-Out) */
-
+  .fy-hero-wrap{
+    height: 72svh !important;
+  }
   .fy-hero-video,
   .fy-hero-wrap > video{
-    width: calc(100vw / var(--fy-zoom)) !important;   /* ≈154vw */
+    /* Breiter + zentriert skaliert → optischer Zoom-Out ohne Seitenscroll */
+    width: calc(100vw / var(--fy-mobile-zoom)) !important; /* ~153.85vw bei .65 */
     height: 72svh !important;
-    transform: translateX(-50%) scale(var(--fy-zoom)) !important;
+    transform: scale(var(--fy-mobile-zoom)) !important;
     transform-origin: center center !important;
-    object-position: 50% 50% !important;
   }
 }
-
-
-   

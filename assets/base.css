@@ -3597,57 +3597,60 @@ details-disclosure > details {
   --shadow-visible: var(--media-shadow-visible);
 }
 /* =========================================================
-   FADED YOUTH — APPEND-ONLY OVERRIDE (sauber, minimal)
+   FADED YOUTH — FINAL VISUAL BASE & FIXES (append-only)
    ========================================================= */
 
-.section-header { margin-bottom: 0 !important; }
-
-/* 1) Z-Index-Sicherheit: Header/Drawer über Video */
-body:has(.fy-hero-wrap) .fy-hero-wrap,
-body:has(.fy-hero-wrap) .fy-hero-video{ position:relative !important; z-index:0 !important; }
-body:has(.fy-hero-wrap) .header,
-body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z-index:99 !important; }
-
-/* 2) Fokuspunkte bequem steuerbar */
-:root{
-  --fy-focal-x: 50%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
-  --fy-focal-y-desktop: 50%; /* 45% = etwas höher, 55% = etwas tiefer */
-  --fy-focal-y-mobile: 50%;
+/* --- 1. Header Klick-Fix & Z-Index --- */
+.header-wrapper,
+.shopify-section-header,
+header.header--sticky {
+  position: relative !important; 
+  z-index: 99999 !important; /* ULTRA-HOCH für Klick-Freigabe */
 }
 
-/* 3) Desktop: echtes Center + robuste VH-Units */
-@media (min-width: 769px){
-  body:has(.fy-hero-wrap) .fy-hero-video{
-    width: 100% !important;
-    height: 100vh !important;
-    height: 100svh !important;  /* iOS Safari fix */
-    height: 100dvh !important;  /* neuere Browser */
-    object-fit: cover !important;
-    object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
-    transform: none !important;
-    background:#000 !important;
-  }
+/* --- 2. Header Design (3-Säulen Grid) --- */
+.fy-header-grid {
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  gap: 20px;
+}
+.header__block--center {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.header__heading {
+  grid-column: 2; /* Logo in die Mitte setzen */
+  text-align: center !important;
 }
 
-/* 4) Mobile: randlos, keine Shifts/Scales, sauber mittig */
-@media (max-width: 768px){
-  body:has(.fy-hero-wrap) .fy-hero-wrap{
+/* --- 3. Hero Video Breiten- & Bündigkeits-Fix (ULTIMATIV) --- */
+
+/* Verhindert den horizontalen Überlauf */
+html, body {
+  overflow-x: hidden !important;
+  background: #000 !important;
+}
+
+/* NEUTRALISIERT ALLE DAWN CONTAINER UM DAS HERO VIDEO (Wird den Fehler beheben) */
+/* Sucht nach dem ersten Section-Container im Hauptinhalt und entfernt alle Abstände */
+.content-for-index > * {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* Stellt sicher, dass das Video selbst keine Abstände hat und unter dem Header liegt */
+.fy-hero-wrap, .fy-hero-video {
+    width: 100% !important; 
+    max-width: 100% !important;
     margin: 0 !important;
-    width: 100% !important;
-    overflow: hidden !important;
-    background:#000 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh; /* You might need to adjust this */
-  }
-  body:has(.fy-hero-wrap) .fy-hero-video{
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
-    transform: scale(0.65) !important;
-    background:#000 !important;
-  }
-  html, body{ overflow-x:hidden !important; background:#000 !important; }
+    padding: 0 !important;
+    position: relative !important;
+    z-index: 0 !important;
 }
+
+/* ENDE FADED YOUTH FINAL VISUAL FIXES */

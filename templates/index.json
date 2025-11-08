@@ -9,10 +9,6 @@
  */
 {
   "sections": {
-    "faded_youth_hero": {
-      "type": "faded-youth-hero",
-      "settings": {}
-    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -60,7 +56,6 @@
     }
   },
   "order": [
-    "faded_youth_hero",
     "featured_collection",
     "footer"
   ]

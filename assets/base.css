@@ -3596,117 +3596,61 @@ details-disclosure > details {
   --shadow-opacity: var(--media-shadow-opacity);
   --shadow-visible: var(--media-shadow-visible);
 }
-/* === FADED YOUTH — HERO (HOME ONLY, COMPACT FINAL) === */
+/* =========================================================
+   FADED YOUTH — APPEND-ONLY OVERRIDE (sauber, minimal)
+   ========================================================= */
 
-/* Sicherheit: kein horizontaler Scroll */
-html, body { overflow-x: hidden !important; }
+.section-header { margin-bottom: 0 !important; }
 
-/* Header bleibt über dem Video (nur Home) */
-body.template-index .section-header,
-body.template-index .header,
-body.template-index .shopify-section-header {
-  position: relative !important;
-  z-index: 100 !important;
+/* 1) Z-Index-Sicherheit: Header/Drawer über Video */
+body:has(.fy-hero-wrap) .fy-hero-wrap,
+body:has(.fy-hero-wrap) .fy-hero-video{ position:relative !important; z-index:0 !important; }
+body:has(.fy-hero-wrap) .header,
+body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z-index:99 !important; }
+
+/* 2) Fokuspunkte bequem steuerbar */
+:root{
+  --fy-focal-x: 50%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
+  --fy-focal-y-desktop: 50%; /* 45% = etwas höher, 55% = etwas tiefer */
+  --fy-focal-y-mobile: 50%;
 }
 
-/* Full-bleed Hero-Wrapper (nur Home) */
-body.template-index .fy-hero-wrap{
-  position: relative !important;
-  width: 100vw !important;
-  height: 100svh !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  background:#000 !important;
-  z-index: 0 !important;
-}
-
-/* Dawn-Media-Hüllen im Hero neutralisieren */
-body.template-index .fy-hero-wrap .media,
-body.template-index .fy-hero-wrap .global-media-settings{
-  position: static !important;
-  padding: 0 !important;
-  border: 0 !important;
-  overflow: visible !important;
-}
-
-/* Video absolut zentrieren + „cover“ */
-body.template-index .fy-hero-wrap video,
-body.template-index .fy-hero-video{
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-
-  min-width: 100vw !important;
-  min-height: 100svh !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: none !important;
-  max-height: none !important;
-
-  object-fit: cover !important;
-  object-position: 50% 50% !important;
-  background:#000 !important;
-  z-index: 0 !important;
-}
-
-/* Mobile: ~65% rausgezoomt, trotzdem exakt mittig */
-@media (max-width: 768px){
-  body.template-index .fy-hero-wrap{ height: 72svh !important; }
-  body.template-index .fy-hero-wrap video,
-  body.template-index .fy-hero-video{
-    min-width: 154vw !important;      /* 100 / 0.65 ≈ 154 */
-    min-height: 72svh !important;
-    transform: translate(-50%, -50%) scale(0.65) !important;
-    transform-origin: center center !important;
+/* 3) Desktop: echtes Center + robuste VH-Units */
+@media (min-width: 769px){
+  body:has(.fy-hero-wrap) .fy-hero-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
+    transform: none !important;
+    background:#000 !important;
+    max-width: var(--page-width);
   }
 }
 
-/* Falls der Hero irgendwo anders auftaucht: ausblenden */
-body:not(.template-index) .fy-hero-wrap { display: none !important; }
-/* === FADED YOUTH — HERO LAYOUT (kompakt, stabil) === */
-html, body { overflow-x: hidden !important; }
-
-.fy-hero-wrap{
-  position: relative !important;
-  width: 100vw !important;
-  height: 100svh !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  overflow: hidden !important;
-  background: #000 !important;
-  z-index: 0 !important;
-}
-
-.fy-hero-video{
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-
-  /* „Cover“, aber ohne Objekt-Fit-Bugs */
-  min-width: 100vw !important;
-  min-height: 100svh !important;
-  width: auto !important;
-  height: auto !important;
-  max-width: none !important;
-  max-height: none !important;
-
-  object-fit: cover !important;
-  object-position: 50% 50% !important;
-  background: #000 !important;
-}
-
+/* 4) Mobile: randlos, keine Shifts/Scales, sauber mittig */
 @media (max-width: 768px){
-  .fy-hero-wrap{ height: 72svh !important; }
-  .fy-hero-video{
-    /* 65% „rausgezoomt“ → mehr Szene, weiterhin mittig */
-    min-width: 154vw !important; /* 100 / 0.65 ≈ 154 */
-    min-height: 72svh !important;
-    transform: translate(-50%, -50%) scale(0.65) !important;
-    transform-origin: center center !important;
+  body:has(.fy-hero-wrap) .fy-hero-wrap{
+    margin: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    background:#000 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
+    transform: none !important;
+    background:#000 !important;
+  }
+  html, body{ overflow-x:hidden !important; background:#000 !important; }
 }
-/* === END HERO === */

@@ -1,39 +1,35 @@
-{% comment %}
-  FADED YOUTH — HERO LOOP SECTION (Home only via CSS/UI)
-{% endcomment %}
-<section class="fy-hero-wrap" id="fy-hero">
-  {% if section.settings.video != blank %}
-    {{ section.settings.video
-      | video_tag:
-        autoplay: true,
-        loop: true,
-        muted: true,
-        playsinline: true,
-        controls: false,
-        preload: "auto",
-        class: "fy-hero-video",
-        poster: section.settings.poster | image_url: width: 2000
-    }}
-  {% else %}
-    {% if section.settings.poster != blank %}
-      <img class="fy-hero-video" src="{{ section.settings.poster | image_url: width: 2000 }}" alt="Hero poster" />
-    {% else %}
-      <div style="color:#fff;display:flex;align-items:center;justify-content:center;height:60vh;background:#000">
-        <p>Bitte Video in den Section-Einstellungen auswählen.</p>
-      </div>
-    {% endif %}
-  {% endif %}
-</section>
+{% if template.name == 'index' %}
+  <div class="fy-hero-wrap page-width">
+    <video
+      class="fy-hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto">
+
+      <!-- Full HD -->
+      <source src="https://cdn.shopify.com/videos/c/o/v/93b7c4458e9c49729d499191514b2502.mp4" type="video/mp4" media="(max-width:1280px)">
+
+      <!-- 4K -->
+      <source src="https://cdn.shopify.com/videos/c/o/v/646852d06d884d6e988af8f7629106db.mp4" type="video/mp4" media="(min-width:1281px)">
+    </video>
+  </div>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const v=document.querySelector('.fy-hero-video');
+  if(v){v.play().catch(()=>{v.muted=true;v.play();});}
+});
+</script>
 
 {% schema %}
 {
-  "name": "FADED YOUTH — Hero Loop",
-  "settings": [
-    { "type": "video", "id": "video", "label": "Hero-Video (Shopify Video)" },
-    { "type": "image_picker", "id": "poster", "label": "Poster/Fallback (optional)" }
-  ],
-  "presets": [
-    { "name": "FADED YOUTH — Hero Loop" }
-  ]
+  "name": "FADED YOUTH Hero Video",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [{ "name": "FADED YOUTH Hero Video" }]
 }
 {% endschema %}

@@ -3674,3 +3674,54 @@ html, body,
                scale(var(--fy-mobile-zoom)) !important;
   }
 }
+/* === FY HERO — NUR STARTSEITE === */
+
+/* Sicherheitsnetz: niemals X-Scroll */
+html, body { overflow-x: hidden !important; }
+
+/* Alles, was den Hero betrifft, NUR auf Home */
+body.template-index .content-for-index > .shopify-section:first-child {
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #000 !important;
+}
+
+body.template-index .content-for-index > .shopify-section:first-child video,
+body.template-index .fy-hero-wrap > video,
+body.template-index .fy-hero-video {
+  display: block !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 100vw !important;
+  height: 100svh !important;
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  background: #000 !important;
+  z-index: 0 !important;
+}
+
+/* Mobile: ~65% Zoom-Out, weiterhin mittig */
+@media (max-width: 768px){
+  body.template-index .content-for-index > .shopify-section:first-child video,
+  body.template-index .fy-hero-wrap > video,
+  body.template-index .fy-hero-video {
+    width: 154vw !important;                 /* 100 / 0.65 ≈ 154 */
+    height: 72svh !important;
+    transform: translateX(-50%) scale(0.65) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* Header bleibt drüber – nur Home */
+body.template-index .section-header,
+body.template-index .header,
+body.template-index .shopify-section-header {
+  position: relative !important;
+  z-index: 99 !important;
+}
+
+/* Falls der Hero irgendwo anders doch eingefügt würde: verstecken */
+body:not(.template-index) .fy-hero-wrap { display: none !important; }

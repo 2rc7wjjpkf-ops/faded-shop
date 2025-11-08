@@ -1,35 +1,89 @@
-{% if template.name == 'index' %}
-  <div class="fy-hero-wrap page-width">
+{% if request.page_type != 'index' %}{% return %}{% endif %}
+
+<section class="fy-hero-wrap">
+  <div class="fy-hero-media">
     <video
       class="fy-hero-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto">
-
-      <!-- Full HD -->
-      <source src="https://cdn.shopify.com/videos/c/o/v/93b7c4458e9c49729d499191514b2502.mp4" type="video/mp4" media="(max-width:1280px)">
-
-      <!-- 4K -->
-      <source src="https://cdn.shopify.com/videos/c/o/v/646852d06d884d6e988af8f7629106db.mp4" type="video/mp4" media="(min-width:1281px)">
+      playsinline muted autoplay loop preload="metadata"
+      {% if section.settings.poster_desktop %}poster="{{ section.settings.poster_desktop | image_url }}"{% endif %}
+    >
+      {% if section.settings.mobile_video_url %}
+        <source src="{{ section.settings.mobile_video_url }}" type="video/mp4" media="(max-width: 768px)">
+      {% else %}
+        <source src="https://cdn.shopify.com/videos/c/o/v/e4a19337a343467f9380b4a4d6f3add1.mp4" type="video/mp4" media="(max-width: 768px)">
+      {% endif %}
+      {% if section.settings.desktop_video_url %}
+        <source src="{{ section.settings.desktop_video_url }}" type="video/mp4">
+      {% else %}
+        <source src="https://cdn.shopify.com/videos/c/o/v/e4a19337a343467f9380b4a4d6f3add1.mp4" type="video/mp4">
+      {% endif %}
     </video>
   </div>
-{% endif %}
+</section>
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
-  const v=document.querySelector('.fy-hero-video');
-  if(v){v.play().catch(()=>{v.muted=true;v.play();});}
-});
-</script>
+<style>
+/* Full-bleed Wrapper */
+.fy-hero-wrap{
+  position:relative; width:100vw; height:100dvh;
+  margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw);
+  padding:0; overflow:hidden; background:#000; z-index:0;
+}
+
+/* Media-Layer */
+.fy-hero-media{ position:absolute; inset:0; }
+
+/* Video absolut zentriert, echtes Cover ohne Seitenscroll */
+.fy-hero-media video{
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%); transform-origin:center center;
+  min-width:100vw; min-height:100dvh; width:auto; height:auto; max-width:none; max-height:none;
+  object-fit:cover; object-position:50% 50%; background:#000; display:block;
+}
+
+/* Header sicher darüber (ohne Z-Index-Krieg) */
+.section-header, .header{ position:relative; z-index:10; }
+
+/* Mobile: ~65% rausgezoomt (= mehr Szene sichtbar), weiterhin exakt mittig */
+@media (max-width:768px){
+  .fy-hero-wrap{ height:72dvh; }
+  .fy-hero-media video{
+    transform:translate(-50%,-50%) scale(.65);
+    min-width: 154vw; /* 100vw / 0.65 */
+    min-height: 154vh; /* 100vh / 0.65 */
+  }
+}
+
+/* Sicherheitsnetz: kein horizontaler Scroll */
+html, body{ overflow-x:hidden; }
+</style>
 
 {% schema %}
 {
   "name": "FADED YOUTH Hero Video",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "desktop_video_url",
+      "label": "Desktop Video URL"
+    },
+    {
+      "type": "text",
+      "id": "mobile_video_url",
+      "label": "Mobile Video URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_desktop",
+      "label": "Desktop Poster Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_mobile",
+      "label": "Mobile Poster Image"
+    }
+  ],
   "presets": [{ "name": "FADED YOUTH Hero Video" }]
 }
 {% endschema %}

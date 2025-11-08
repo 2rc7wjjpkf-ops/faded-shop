@@ -3659,3 +3659,61 @@ body:has(.fy-hero-wrap) .shopify-section-header{
   position:relative!important;
   z-index:99!important;
 }
+/* ===== FADED YOUTH — FINAL HERO OVERRIDE (no :has, no leaks) ===== */
+
+/* 0) Nie wieder Horizontal-Scroll */
+html, body { overflow-x: hidden !important; }
+.content-for-index, .shopify-section, .page-width { overflow-x: hidden !important; }
+
+/* 1) Full-bleed Wrapper neutralisiert jedes page-width-Padding */
+.page-width .fy-hero-wrap,
+.shopify-section .fy-hero-wrap {
+  position: relative !important;
+  width: 100vw !important;
+
+  /* zieht den Block aus jedem Container-Padding raus */
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #000 !important;
+  z-index: 0 !important;
+}
+
+/* 2) Video wirklich zentriert (kein Rand, kein Rechts-Shift) */
+.fy-hero-video,
+.fy-hero-wrap > video {
+  display: block !important;
+  position: relative !important;
+
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+
+  width: 100vw !important;
+  height: 100svh !important;
+
+  object-fit: cover !important;
+  object-position: 50% 50% !important;
+  background: #000 !important;
+  z-index: 0 !important;
+}
+
+/* 3) Header bleibt sicher oben */
+.section-header, .header, .shopify-section-header {
+  position: relative !important;
+  z-index: 99 !important;
+}
+
+/* 4) Mobile: ~65% „rausgezoomt“ = mehr Szene sichtbar, trotzdem mittig */
+@media (max-width: 768px){
+  .fy-hero-video,
+  .fy-hero-wrap > video{
+    /* breiter + scale → effektiv ~65% Zoom-Out, ohne seitlichen Scroll */
+    width: 154vw !important;                 /* 100 / 0.65 ≈ 153.85 */
+    height: 72svh !important;
+    transform: translateX(-50%) scale(0.65) !important;
+    transform-origin: center center !important;
+    object-position: 50% 50% !important;
+  }
+}

@@ -7,6 +7,9 @@
       playsinline muted autoplay loop preload="metadata"
       {% if section.settings.poster_desktop %}poster="{{ section.settings.poster_desktop | image_url }}"{% endif %}
     >
+      {% if section.settings.mobile_video_url %}
+        <source src="{{ section.settings.mobile_video_url }}" type="video/mp4" media="(max-width: 768px)">
+      {% endif %}
       {% if section.settings.desktop_video_url %}
         <source src="{{ section.settings.desktop_video_url }}" type="video/mp4">
       {% endif %}

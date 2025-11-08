@@ -3628,22 +3628,18 @@ header.header--sticky {
 
 /* --- 3. Hero Video Breiten- & Bündigkeits-Fix (ULTIMATIV) --- */
 
-/* Verhindert den horizontalen Überlauf */
-html, body {
-  overflow-x: hidden !important;
-  background: #000 !important;
+/* Löst das Problem der inneren Paddings von .page-width und .content-for-index */
+.page-width:has(.fy-hero-wrap),
+.content-for-index > section:first-child.shopify-section { 
+    /* Zwingt die Container, alle Abstände freizugeben und Full-Width zu sein */
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important; 
+    width: 100% !important;
 }
 
-/* NEUTRALISIERT ALLE DAWN CONTAINER UM DAS HERO VIDEO (Wird den Fehler beheben) */
-/* Sucht nach dem ersten Section-Container im Hauptinhalt und entfernt alle Abstände */
-.content-for-index > * {
-  padding: 0 !important;
-  margin: 0 !important;
-  max-width: none !important;
-  width: 100% !important;
-}
 
-/* Stellt sicher, dass das Video selbst keine Abstände hat und unter dem Header liegt */
+/* Stellt sicher, dass das Video selbst 100% dieser freigegebenen Breite nutzt und darunter liegt */
 .fy-hero-wrap, .fy-hero-video {
     width: 100% !important; 
     max-width: 100% !important;
@@ -3651,6 +3647,22 @@ html, body {
     padding: 0 !important;
     position: relative !important;
     z-index: 0 !important;
+}
+
+/* Neutralisiert den Haupt-Content-Wrapper von Dawn */
+#main-content,
+.main-content,
+.content-for-index {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+}
+
+/* Verhindert den horizontalen Überlauf */
+html, body {
+  overflow-x: hidden !important;
+  background: #000 !important;
 }
 
 /* ENDE FADED YOUTH FINAL VISUAL FIXES */

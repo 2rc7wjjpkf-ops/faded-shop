@@ -1,25 +1,30 @@
 {% comment %}
-  FADED YOUTH — Final Header (v2)
-  Fixes: White background, blue icons, vertical alignment, works on all pages
+  FADED YOUTH — FIXED TRANSPARENT HEADER (COMPATIBLE)
+  Visible on all pages, integrates with Shopify Dawn base
 {% endcomment %}
 
 <style>
+  .section-header {
+    position: relative;
+    z-index: 300;
+  }
+
   .fy-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 300;
+    z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.15) !important;
+    background: rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(10px);
     transition: background 0.4s ease, backdrop-filter 0.4s ease;
   }
 
   .fy-header.scrolled {
-    background: rgba(0, 0, 0, 0.9) !important;
+    background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(16px);
   }
 
@@ -32,7 +37,6 @@
     justify-content: space-between;
   }
 
-  /* NAVIGATION */
   .fy-nav {
     display: flex;
     gap: 2.4rem;
@@ -52,7 +56,6 @@
 
   .fy-nav a:hover { opacity: 0.7; }
 
-  /* LOGO */
   .fy-header__logo {
     display: flex;
     align-items: center;
@@ -66,7 +69,6 @@
     object-fit: contain;
   }
 
-  /* ICONS */
   .fy-icons {
     display: flex;
     align-items: center;
@@ -82,7 +84,6 @@
 
   .fy-icons svg:hover { opacity: 0.7; }
 
-  /* MOBILE */
   @media (max-width: 768px) {
     .fy-header__inner {
       padding: 1.2rem 1.6rem;
@@ -92,43 +93,45 @@
   }
 </style>
 
-<header class="fy-header" id="fy-header">
-  <div class="fy-header__inner">
-    <ul class="fy-nav">
-      {% for link in linklists.main-menu.links %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-      {% endfor %}
-    </ul>
+<section class="section-header">
+  <header class="fy-header" id="fy-header">
+    <div class="fy-header__inner">
+      <ul class="fy-nav">
+        {% for link in linklists.main-menu.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
 
-    <a href="{{ routes.root_url }}" class="fy-header__logo">
-      {% if settings.logo %}
-        {{
-          settings.logo
-          | image_url: width: 600
-          | image_tag:
-            width: 200,
-            alt: shop.name
-        }}
-      {% else %}
-        <span style="color:white;">{{ shop.name }}</span>
-      {% endif %}
-    </a>
-
-    <div class="fy-icons">
-      <a href="{{ routes.search_url }}">
-        <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
+      <a href="{{ routes.root_url }}" class="fy-header__logo">
+        {% if settings.logo %}
+          {{
+            settings.logo
+            | image_url: width: 600
+            | image_tag:
+              width: 200,
+              alt: shop.name
+          }}
+        {% else %}
+          <span style="color:white;">{{ shop.name }}</span>
+        {% endif %}
       </a>
-      {% if shop.customer_accounts_enabled %}
-        <a href="{{ routes.account_url }}">
-          <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+
+      <div class="fy-icons">
+        <a href="{{ routes.search_url }}">
+          <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
         </a>
-      {% endif %}
-      <a href="{{ routes.cart_url }}">
-        <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-      </a>
+        {% if shop.customer_accounts_enabled %}
+          <a href="{{ routes.account_url }}">
+            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+          </a>
+        {% endif %}
+        <a href="{{ routes.cart_url }}">
+          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+        </a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
+</section>
 
 <script>
   document.addEventListener("scroll", () => {

@@ -3521,6 +3521,26 @@ details-disclosure > details {
 
 }
 
+
+/* Drawer über allem + schwarz */
+.menu-drawer{
+  position:fixed!important;inset:0!important;z-index:10000!important;
+  background:rgba(0,0,0,.95)!important;color:#fff!important;overflow:auto!important}
+.menu-drawer__inner{padding:80px 40px!important;display:flex!important;gap:32px!important}
+.menu-drawer__menu-item{text-transform:uppercase;letter-spacing:.08em;font-size:20px!important;color:#fff!important}
+
+/* Close-Icon (Dawn summary) sichtbar rechts oben */
+#Details-menu-drawer-container[open]>summary.header__icon--menu{
+  position:fixed!important;top:16px;right:16px;z-index:10050!important}
+#Details-menu-drawer-container[open]>summary .icon-hamburger{display:none!important}
+#Details-menu-drawer-container[open]>summary .icon-close{
+  visibility:visible!important;opacity:1!important;transform:none!important}
+#Details-menu-drawer-container[open]>summary .icon-close *,
+#Details-menu-drawer-container[open]>summary svg.icon-close *{
+  stroke:#cfcfcf!important;fill:none!important}
+#Details-menu-drawer-container[open]>summary .icon-close:hover *,
+#Details-menu-drawer-container[open]>summary svg.icon-close:hover *{stroke:#fff!important}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
@@ -3596,61 +3616,41 @@ details-disclosure > details {
   --shadow-opacity: var(--media-shadow-opacity);
   --shadow-visible: var(--media-shadow-visible);
 }
+
 /* =========================================================
-   FADED YOUTH — APPEND-ONLY OVERRIDE (sauber, minimal)
    ========================================================= */
 
+
+/* ============================
+   (append-only, nichts oben anfassen)
+   ============================ */
+
+/* 0) Header-Spalt aus header.liquid neutralisieren */
 .section-header { margin-bottom: 0 !important; }
 
-/* 1) Z-Index-Sicherheit: Header/Drawer über Video */
+/* 1) Full-bleed ohne Seiteneinzüge, auch im Editor */
+body:has(.fy-hero-wrap) .page-width:has(.fy-hero-wrap),
+body:has(.fy-hero-wrap) .content-for-index:has(.fy-hero-wrap){
+  max-width: 100vw !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) Z-Index-Sicherheit: Header/Drawer über Video */
 body:has(.fy-hero-wrap) .fy-hero-wrap,
 body:has(.fy-hero-wrap) .fy-hero-video{ position:relative !important; z-index:0 !important; }
 body:has(.fy-hero-wrap) .header,
 body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z-index:99 !important; }
 
-/* 2) Fokuspunkte bequem steuerbar */
+/* 3) Fokuspunkte bequem steuerbar */
 :root{
   --fy-focal-x: 50%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
   --fy-focal-y-desktop: 50%; /* 45% = etwas höher, 55% = etwas tiefer */
   --fy-focal-y-mobile: 50%;
 }
 
-/* 3) Desktop: echtes Center + robuste VH-Units */
-@media (min-width: 769px){
-  body:has(.fy-hero-wrap) .fy-hero-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  body:has(.fy-hero-wrap) .fy-hero-video{
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
-    transform: none !important;
-    background:#000 !important;
-    max-width: var(--page-width);
-  }
-}
-
-/* 4) Mobile: randlos, keine Shifts/Scales, sauber mittig */
-@media (max-width: 768px){
-  body:has(.fy-hero-wrap) .fy-hero-wrap{
-    margin: 0 !important;
-    width: 100% !important;
-    overflow: hidden !important;
-    background:#000 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  body:has(.fy-hero-wrap) .fy-hero-video{
-    width: 100% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
-    transform: none !important;
-    background:#000 !important;
-  }
-  html, body{ overflow-x:hidden !important; background:#000 !important; }
+.section-header {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }

@@ -1,47 +1,70 @@
-{% if request.page_type != 'index' %}{% return %}{% endif %}
+{% comment %}
+  FADED YOUTH — HERO VIDEO (FINAL CLEAN BUILD)
+  - Vollflächig, bündig unter Header
+  - Kein Blur, kein Horizontal-Shift
+  - Black background fallback
+{% endcomment %}
 
-<section class="fy-hero-wrap">
+{% if request.page_type == 'index' %}
+<section id="fy-hero" class="fy-hero-wrap">
   <div class="fy-hero-media">
     <video
       class="fy-hero-video"
-      playsinline muted autoplay loop preload="metadata"
-      {% if section.settings.poster_desktop %}poster="{{ section.settings.poster_desktop | image_url }}"{% endif %}
-    >
-      {% if section.settings.mobile_video_url %}
-        <source src="{{ section.settings.mobile_video_url }}" type="video/mp4" media="(max-width: 768px)">
-      {% else %}
-        <source src="https://cdn.shopify.com/videos/c/o/v/e4a19337a343467f9380b4a4d6f3add1.mp4" type="video/mp4" media="(max-width: 768px)">
+      playsinline
+      muted
+      autoplay
+      loop
+      preload="metadata"
+      aria-hidden="true"
+      {% if section.settings.poster_desktop %}
+        poster="{{ section.settings.poster_desktop | image_url }}"
       {% endif %}
-      {% if section.settings.desktop_video_url %}
+    >
+      {% if section.settings.mobile_video_url != blank %}
+        <source src="{{ section.settings.mobile_video_url }}" type="video/mp4" media="(max-width: 768px)">
+      {% endif %}
+      {% if section.settings.desktop_video_url != blank %}
         <source src="{{ section.settings.desktop_video_url }}" type="video/mp4">
       {% else %}
-        <source src="https://cdn.shopify.com/videos/c/o/v/e4a19337a343467f9380b4a4d6f3add1.mp4" type="video/mp4">
+        <source src="https://cdn.shopify.com/videos/c/o/v/646852d06d884d6e988af8f7629106db.mp4" type="video/mp4">
       {% endif %}
     </video>
   </div>
 </section>
 
 <style>
-  :root {
-    --fy-focal-x: 50%;
-    --fy-focal-y-desktop: 50%;
-    --fy-focal-y-mobile: 50%;
+  /* Entfernt Theme-Abstand über MainContent */
+  #MainContent {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
+  :root {
+    --fy-mobile-scale: {{ section.settings.mobile_scale | default: 65 | divided_by: 100.0 }};
+    --fy-focal-x: {{ section.settings.focal_x | default: 50 }}%;
+    --fy-focal-y-desktop: {{ section.settings.focal_y_desktop | default: 50 }}%;
+    --fy-focal-y-mobile: {{ section.settings.focal_y_mobile | default: 50 }}%;
+  }
+
+  /* === BASE LAYOUT === */
   .fy-hero-wrap {
-    width: 100vw;
-    height: 100dvh;
     position: relative;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
     overflow: hidden;
     background: #000;
+    margin: 0;
+    padding: 0;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    z-index: 1;
   }
 
   .fy-hero-media {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
   }
 
   .fy-hero-video {
@@ -49,64 +72,61 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 100vw;
-    min-height: 100dvh;
-    width: auto;
-    height: auto;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     object-position: var(--fy-focal-x) var(--fy-focal-y-desktop);
+    background: #000;
+    z-index: 1;
   }
 
-  .section-header, .header {
-    position: relative;
-    z-index: 10;
-  }
-
-  html, body {
-    overflow-x: hidden;
-  }
-
+  /* === MOBILE === */
   @media (max-width: 768px) {
     .fy-hero-wrap {
-      height: 72dvh;
+      height: 72vh;
     }
-
     .fy-hero-video {
-      transform: translate(-50%, -50%) scale(.65);
-      min-width: 154vw; /* 100vw / 0.65 */
-      min-height: 111dvh; /* 72dvh / 0.65 */
+      transform: translate(-50%, -50%);
+      transform-origin: center center;
       object-position: var(--fy-focal-x) var(--fy-focal-y-mobile);
+      width: 100vw;
+      height: 72vh;
     }
+  }
+
+  /* Header bleibt darüber */
+  .section-header, .shopify-section-header {
+    position: relative;
+    z-index: 999;
   }
 </style>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const v = document.querySelector("#fy-hero .fy-hero-video");
+    if (v) {
+      v.addEventListener("loadedmetadata", () => {
+        v.classList.add("is-ready");
+      }, { once: true });
+    }
+  });
+</script>
+{% endif %}
+
 {% schema %}
 {
-  "name": "FADED YOUTH Hero Video",
-  "tag": "section",
-  "class": "section",
+  "name": "FADED YOUTH — Hero Video",
   "settings": [
-    {
-      "type": "text",
-      "id": "desktop_video_url",
-      "label": "Desktop Video URL"
-    },
-    {
-      "type": "text",
-      "id": "mobile_video_url",
-      "label": "Mobile Video URL"
-    },
-    {
-      "type": "image_picker",
-      "id": "poster_desktop",
-      "label": "Desktop Poster Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "poster_mobile",
-      "label": "Mobile Poster Image"
-    }
+    { "type": "text", "id": "desktop_video_url", "label": "Desktop MP4 URL" },
+    { "type": "text", "id": "mobile_video_url", "label": "Mobile MP4 URL (optional)" },
+    { "type": "image_picker", "id": "poster_desktop", "label": "Poster (Desktop, optional)" },
+    { "type": "range", "id": "mobile_scale", "label": "Mobile Zoom-Out (%)", "min": 50, "max": 90, "step": 1, "default": 65 },
+    { "type": "range", "id": "focal_x", "label": "Fokus X (0–100%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+    { "type": "range", "id": "focal_y_desktop", "label": "Fokus Y Desktop (0–100%)", "min": 0, "max": 100, "step": 1, "default": 50 },
+    { "type": "range", "id": "focal_y_mobile", "label": "Fokus Y Mobile (0–100%)", "min": 0, "max": 100, "step": 1, "default": 50 }
   ],
-  "presets": [{ "name": "FADED YOUTH Hero Video" }]
+  "presets": [
+    { "name": "FADED YOUTH — Hero Video" }
+  ]
 }
 {% endschema %}

@@ -1,8 +1,8 @@
 {% comment %}
-  FADED YOUTH — HERO VIDEO (FINAL BUILD)
-  - Vollflächig, kein Horizontal-Shift
-  - Perfekt mittig, bündig mit restlicher Seite
-  - Black background fallback, kein Blur-Konflikt
+  FADED YOUTH — HERO VIDEO (FINAL CLEAN BUILD)
+  - Vollflächig, bündig unter Header
+  - Kein Blur, kein Horizontal-Shift
+  - Black background fallback
 {% endcomment %}
 
 {% if request.page_type == 'index' %}
@@ -33,6 +33,12 @@
 </section>
 
 <style>
+  /* Entfernt Theme-Abstand über MainContent */
+  #MainContent {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
   :root {
     --fy-mobile-scale: {{ section.settings.mobile_scale | default: 65 | divided_by: 100.0 }};
     --fy-focal-x: {{ section.settings.focal_x | default: 50 }}%;
@@ -84,7 +90,7 @@
     }
   }
 
-  /* Sicherstellen, dass Header darüber bleibt */
+  /* Header bleibt darüber */
   .section-header, .shopify-section-header {
     position: relative;
     z-index: 999;
@@ -120,7 +126,4 @@
   ]
 }
 {% endschema %}
-#MainContent {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
+

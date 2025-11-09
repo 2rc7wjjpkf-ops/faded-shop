@@ -1,8 +1,10 @@
 {% comment %}
-  FADED YOUTH HEADER – Transparent + Menu + Hero Fix
+  FADED YOUTH – Final Clean Header Fix
+  Transparent, perfectly centered, aligned with hero.
 {% endcomment %}
 
 <style>
+  /* CORE HEADER */
   .fy-header {
     position: fixed;
     top: 0;
@@ -18,26 +20,35 @@
   }
 
   .fy-header.scrolled {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(18px);
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(16px);
   }
 
   .fy-header__inner {
     width: 100%;
-    max-width: 1600px;
-    padding: 1.4rem 3rem;
+    max-width: 1500px;
+    padding: 1.2rem 2.4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   /* LOGO */
-  .fy-header__logo img {
-    width: clamp(110px, 18vw, 220px);
-    height: auto;
+  .fy-header__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    text-align: center;
   }
 
-  /* MENU */
+  .fy-header__logo img {
+    width: clamp(120px, 18vw, 220px);
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* NAVIGATION */
   .fy-nav {
     display: flex;
     gap: 2.4rem;
@@ -49,10 +60,10 @@
   .fy-nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.25s ease;
   }
 
   .fy-nav a:hover {
@@ -62,7 +73,8 @@
   /* ICONS */
   .fy-icons {
     display: flex;
-    gap: 1.2rem;
+    align-items: center;
+    gap: 1.4rem;
   }
 
   .fy-icons svg {
@@ -73,11 +85,11 @@
 
   @media (max-width: 768px) {
     .fy-header__inner {
-      padding: 1rem 1.2rem;
+      padding: 1rem 1.4rem;
     }
 
     .fy-nav {
-      display: none; /* simplify mobile for now */
+      display: none; /* hide menu on mobile for now */
     }
 
     .fy-header__logo img {
@@ -88,6 +100,12 @@
 
 <header class="fy-header" id="fy-header">
   <div class="fy-header__inner">
+    <ul class="fy-nav">
+      {% for link in linklists.main-menu.links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+
     <a href="{{ routes.root_url }}" class="fy-header__logo">
       {% if settings.logo %}
         {{
@@ -101,12 +119,6 @@
         <span style="color:white;">{{ shop.name }}</span>
       {% endif %}
     </a>
-
-    <ul class="fy-nav">
-      {% for link in linklists.main-menu.links %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-      {% endfor %}
-    </ul>
 
     <div class="fy-icons">
       <a href="{{ routes.search_url }}">
@@ -125,6 +137,7 @@
 </header>
 
 <script>
+  // Scroll Fade
   document.addEventListener("scroll", () => {
     const header = document.getElementById("fy-header");
     if (window.scrollY > 60) header.classList.add("scrolled");

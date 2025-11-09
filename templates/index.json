@@ -1,9 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "fy_hero": {
-      "type": "faded-youth-hero",
-      "settings": {}
-    },
+    "fy_hero": { "type": "faded-youth-hero", "settings": {} },
+
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -32,10 +39,10 @@
         "padding_bottom": 40
       }
     },
+
     "footer": {
       "type": "footer",
       "settings": {
-        "color_scheme": "",
         "newsletter_enable": true,
         "newsletter_heading": "Abonniere unsere E-Mails",
         "enable_follow_on_shop": true,
@@ -50,9 +57,5 @@
       }
     }
   },
-  "order": [
-    "fy_hero",
-    "featured_collection",
-    "footer"
-  ]
+  "order": ["fy_hero", "featured_collection", "footer"]
 }

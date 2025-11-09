@@ -1,134 +1,102 @@
 {% comment %}
-  FADED YOUTH — CLEAN WHITE HEADER (FINAL BUILD)
-  - Weißer Sticky Header
-  - Menü links, Logo zentriert, Icons rechts
-  - Schwarze Icons und Text
-  - Safe für alle Shopify-Themes
+  FADED YOUTH — FINAL FIXED WHITE HEADER
+  Einfacher stabiler Header:
+  - Menü links
+  - Logo in der Mitte
+  - Icons rechts (schwarz)
+  - Weißer Hintergrund, sticky oben
 {% endcomment %}
 
 <header class="fy-header" role="banner">
-  <div class="fy-header__inner page-width">
+  <div class="fy-header__inner">
     <!-- Menü links -->
     <nav class="fy-header__menu">
-      <ul class="fy-header__menu-list">
+      <ul>
         {% for link in linklists.main-menu.links %}
-          <li class="fy-header__menu-item">
-            <a href="{{ link.url }}" class="fy-header__link">{{ link.title }}</a>
-          </li>
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
         {% endfor %}
       </ul>
     </nav>
 
-    <!-- Logo zentriert -->
+    <!-- Logo in der Mitte -->
     <div class="fy-header__logo">
       <a href="{{ routes.root_url }}">
         {% if settings.logo %}
           {{ settings.logo | image_url: width: 600 | image_tag: width: 200, alt: shop.name }}
         {% else %}
-          <span class="fy-header__text-logo">{{ shop.name }}</span>
+          <span>{{ shop.name }}</span>
         {% endif %}
       </a>
     </div>
 
     <!-- Icons rechts -->
     <div class="fy-header__icons">
-      <a href="{{ routes.search_url }}" class="fy-header__icon">
-        {{ 'icon-search.svg' | inline_asset_content }}
-      </a>
+      <a href="{{ routes.search_url }}">{{ 'icon-search.svg' | inline_asset_content }}</a>
       {% if shop.customer_accounts_enabled %}
-        <a href="{{ routes.account_url }}" class="fy-header__icon">
-          {{ 'icon-account.svg' | inline_asset_content }}
-        </a>
+        <a href="{{ routes.account_url }}">{{ 'icon-account.svg' | inline_asset_content }}</a>
       {% endif %}
-      <a href="{{ routes.cart_url }}" class="fy-header__icon">
-        {{ 'icon-cart.svg' | inline_asset_content }}
-      </a>
+      <a href="{{ routes.cart_url }}">{{ 'icon-cart.svg' | inline_asset_content }}</a>
     </div>
   </div>
 </header>
 
 <style>
-  /* ==== BASIS ==== */
   .fy-header {
-    background: #fff !important;
-    border-bottom: 1px solid #e5e5e5;
     position: sticky;
     top: 0;
     width: 100%;
-    z-index: 999;
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 1000;
   }
 
   .fy-header__inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.4rem 2.8rem;
+    padding: 1.2rem 2rem;
+    max-width: 1500px;
     margin: 0 auto;
   }
 
-  /* ==== MENU ==== */
-  .fy-header__menu-list {
+  .fy-header__menu ul {
     display: flex;
-    gap: 2.6rem;
     list-style: none;
+    gap: 2.4rem;
     margin: 0;
     padding: 0;
   }
 
-  .fy-header__link {
-    color: #000 !important;
+  .fy-header__menu a {
     text-decoration: none;
+    color: #000;
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    transition: opacity 0.25s ease;
   }
 
-  .fy-header__link:hover {
-    opacity: 0.6;
-  }
-
-  /* ==== LOGO ==== */
-  .fy-header__logo {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .fy-header__logo img {
-    max-height: 56px;
+  .fy-header__logo a img {
+    max-height: 60px;
     width: auto;
   }
 
-  /* ==== ICONS ==== */
   .fy-header__icons {
     display: flex;
     align-items: center;
-    gap: 1.6rem;
+    gap: 1.4rem;
   }
 
-  .fy-header__icon svg {
+  .fy-header__icons svg {
     width: 24px;
     height: 24px;
     fill: #000 !important;
-    transition: opacity 0.25s ease;
+    stroke: #000 !important;
   }
 
-  .fy-header__icon:hover svg {
-    opacity: 0.6;
-  }
-
-  /* ==== MOBILE ==== */
   @media (max-width: 768px) {
     .fy-header__menu {
       display: none;
     }
-
-    .fy-header__logo img {
-      max-width: 160px;
-    }
-
     .fy-header__inner {
       padding: 1rem 1.6rem;
     }

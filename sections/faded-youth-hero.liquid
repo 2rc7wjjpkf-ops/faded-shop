@@ -72,10 +72,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     object-position: var(--fy-focal-x) var(--fy-focal-y-desktop);
     background: #000;
@@ -88,11 +86,11 @@
       height: 72vh;
     }
     .fy-hero-video {
-      transform: translate(-50%, -50%) scale(var(--fy-mobile-scale));
+      transform: translate(-50%, -50%);
       transform-origin: center center;
       object-position: var(--fy-focal-x) var(--fy-focal-y-mobile);
-      min-width: calc(100vw / var(--fy-mobile-scale));
-      min-height: calc(100vh / var(--fy-mobile-scale));
+      width: 100vw;
+      height: 72vh;
     }
   }
 

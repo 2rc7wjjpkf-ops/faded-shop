@@ -1,16 +1,14 @@
 {% comment %}
-  FADED YOUTH LUX HEADER
-  Transparent sticky header – perfectly centered, smooth scroll fade.
+  FADED YOUTH HEADER – Transparent + Menu + Hero Fix
 {% endcomment %}
 
 <style>
-  /* === CORE HEADER STYLES === */
-  .header {
+  .fy-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 200;
+    z-index: 300;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,154 +17,126 @@
     transition: background 0.4s ease, backdrop-filter 0.4s ease;
   }
 
-  .header.scrolled {
+  .fy-header.scrolled {
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(18px);
   }
 
-  .header__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.4rem 3rem;
+  .fy-header__inner {
     width: 100%;
     max-width: 1600px;
-  }
-
-  /* === LOGO === */
-  .header__heading-link {
+    padding: 1.4rem 3rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex: 1;
+    justify-content: space-between;
   }
 
-  .header__heading-logo {
+  /* LOGO */
+  .fy-header__logo img {
     width: clamp(110px, 18vw, 220px);
     height: auto;
-    object-fit: contain;
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    opacity: 0;
-    transform: translateY(-10px);
   }
 
-  /* === ICONS === */
-  .header__icons {
+  /* MENU */
+  .fy-nav {
     display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s;
+    gap: 2.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .header__icon svg {
+  .fy-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+  }
+
+  .fy-nav a:hover {
+    opacity: 0.7;
+  }
+
+  /* ICONS */
+  .fy-icons {
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .fy-icons svg {
     width: 22px;
     height: 22px;
     fill: #fff;
   }
 
-  .header__icon {
-    color: #fff;
-    transition: opacity 0.2s ease;
-  }
-
-  .header__icon:hover {
-    opacity: 0.7;
-  }
-
-  /* === FADE-IN ON LOAD === */
-  .loaded .header__heading-logo,
-  .loaded .header__icons {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* === MOBILE === */
   @media (max-width: 768px) {
-    .header__inner {
-      padding: 1rem 1.5rem;
-      justify-content: center;
+    .fy-header__inner {
+      padding: 1rem 1.2rem;
     }
 
-    .header__icons {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
+    .fy-nav {
+      display: none; /* simplify mobile for now */
     }
 
-    .header__heading-logo {
+    .fy-header__logo img {
       width: 160px;
     }
   }
 </style>
 
-<header class="header" id="fy-header">
-  <div class="header__inner">
-    <a href="{{ routes.root_url }}" class="header__heading-link">
+<header class="fy-header" id="fy-header">
+  <div class="fy-header__inner">
+    <a href="{{ routes.root_url }}" class="fy-header__logo">
       {% if settings.logo %}
         {{
           settings.logo
           | image_url: width: 600
           | image_tag:
-            class: 'header__heading-logo',
             width: 200,
             alt: shop.name
         }}
       {% else %}
-        <span class="h2" style="color:white;">{{ shop.name }}</span>
+        <span style="color:white;">{{ shop.name }}</span>
       {% endif %}
     </a>
 
-    <div class="header__icons">
-      <a href="{{ routes.search_url }}" class="header__icon">
+    <ul class="fy-nav">
+      {% for link in linklists.main-menu.links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+
+    <div class="fy-icons">
+      <a href="{{ routes.search_url }}">
         <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
       </a>
       {% if shop.customer_accounts_enabled %}
-        <a href="{{ routes.account_url }}" class="header__icon">
+        <a href="{{ routes.account_url }}">
           <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
         </a>
       {% endif %}
-      <a href="{{ routes.cart_url }}" class="header__icon" id="cart-icon-bubble">
+      <a href="{{ routes.cart_url }}">
         <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-        {% if cart != empty %}
-          <div class="cart-count-bubble">
-            <span aria-hidden="true">{{ cart.item_count }}</span>
-          </div>
-        {% endif %}
       </a>
     </div>
   </div>
 </header>
 
 <script>
-  // Scroll fade-in background
-  document.addEventListener('scroll', () => {
-    const header = document.getElementById('fy-header');
-    if (window.scrollY > 60) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-
-  // Fade-in animation on load
-  window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
+  document.addEventListener("scroll", () => {
+    const header = document.getElementById("fy-header");
+    if (window.scrollY > 60) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
   });
 </script>
 
 {% schema %}
 {
-  "name": "FADED YOUTH Lux Header",
-  "class": "section-header",
+  "name": "FADED YOUTH Header",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    }
+    { "type": "image_picker", "id": "logo", "label": "Logo" }
   ]
 }
 {% endschema %}

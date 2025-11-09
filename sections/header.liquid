@@ -1,10 +1,9 @@
 {% comment %}
-  FADED YOUTH – Final Clean Header Fix
-  Transparent, perfectly centered, aligned with hero.
+  FADED YOUTH — Final Header (v2)
+  Fixes: White background, blue icons, vertical alignment, works on all pages
 {% endcomment %}
 
 <style>
-  /* CORE HEADER */
   .fy-header {
     position: fixed;
     top: 0;
@@ -14,38 +13,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.15) !important;
+    backdrop-filter: blur(10px);
     transition: background 0.4s ease, backdrop-filter 0.4s ease;
   }
 
   .fy-header.scrolled {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.9) !important;
     backdrop-filter: blur(16px);
   }
 
   .fy-header__inner {
     width: 100%;
     max-width: 1500px;
-    padding: 1.2rem 2.4rem;
+    padding: 1.8rem 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-
-  /* LOGO */
-  .fy-header__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    text-align: center;
-  }
-
-  .fy-header__logo img {
-    width: clamp(120px, 18vw, 220px);
-    height: auto;
-    object-fit: contain;
   }
 
   /* NAVIGATION */
@@ -58,16 +42,28 @@
   }
 
   .fy-nav a {
-    color: #fff;
+    color: #fff !important;
     text-decoration: none;
     font-size: 0.9rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     transition: opacity 0.25s ease;
   }
 
-  .fy-nav a:hover {
-    opacity: 0.7;
+  .fy-nav a:hover { opacity: 0.7; }
+
+  /* LOGO */
+  .fy-header__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .fy-header__logo img {
+    width: clamp(130px, 20vw, 240px);
+    height: auto;
+    object-fit: contain;
   }
 
   /* ICONS */
@@ -80,21 +76,19 @@
   .fy-icons svg {
     width: 22px;
     height: 22px;
-    fill: #fff;
+    fill: #ffffff !important;
+    transition: opacity 0.25s ease;
   }
 
+  .fy-icons svg:hover { opacity: 0.7; }
+
+  /* MOBILE */
   @media (max-width: 768px) {
     .fy-header__inner {
-      padding: 1rem 1.4rem;
+      padding: 1.2rem 1.6rem;
     }
-
-    .fy-nav {
-      display: none; /* hide menu on mobile for now */
-    }
-
-    .fy-header__logo img {
-      width: 160px;
-    }
+    .fy-nav { display: none; }
+    .fy-header__logo img { width: 160px; }
   }
 </style>
 
@@ -137,7 +131,6 @@
 </header>
 
 <script>
-  // Scroll Fade
   document.addEventListener("scroll", () => {
     const header = document.getElementById("fy-header");
     if (window.scrollY > 60) header.classList.add("scrolled");

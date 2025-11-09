@@ -1,42 +1,67 @@
 {% comment %}
-  FADED YOUTH — FINAL WHITE HEADER (STABLE BUILD)
-  - Weißer Sticky Header
-  - Logo zentriert
+  FADED YOUTH — STABILER WEISSER HEADER (SHOPIFY SAFE)
+  - Weißer Sticky Header mit Logo zentriert
   - Menü links, Icons rechts
-  - Schwarze Icons, keine Theme-Akzentfarbe
+  - Schwarze Icons, große Schrift
 {% endcomment %}
 
-<style>
-  .section-header {
-    position: relative;
-    z-index: 300;
-  }
+<header class="header header--white" role="banner">
+  <div class="header__inner page-width">
+    <nav class="header__menu">
+      <ul class="header__menu-list">
+        {% for link in linklists.main-menu.links %}
+          <li class="header__menu-item">
+            <a href="{{ link.url }}" class="header__link">{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
 
-  .fy-header {
+    <div class="header__logo">
+      <a href="{{ routes.root_url }}">
+        {% if settings.logo %}
+          {{ settings.logo | image_url: width: 600 | image_tag: width: 200, alt: shop.name }}
+        {% else %}
+          <span class="header__text-logo">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="header__icons">
+      <a href="{{ routes.search_url }}" class="header__icon">
+        {{ 'icon-search.svg' | inline_asset_content }}
+      </a>
+      {% if shop.customer_accounts_enabled %}
+        <a href="{{ routes.account_url }}" class="header__icon">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+      {% endif %}
+      <a href="{{ routes.cart_url }}" class="header__icon">
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* --- Basis --- */
+  .header--white {
+    background: #fff !important;
+    border-bottom: 1px solid #e5e5e5;
     position: sticky;
     top: 0;
-    left: 0;
-    width: 100%;
-    background: #fff;
-    border-bottom: 1px solid #e5e5e5;
     z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
-  .fy-header__inner {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 1.2rem 3rem;
+  .header__inner {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 2.8rem;
   }
 
-  /* === NAVIGATION === */
-  .fy-nav {
+  /* --- Menü --- */
+  .header__menu-list {
     display: flex;
     gap: 2.6rem;
     list-style: none;
@@ -44,107 +69,61 @@
     padding: 0;
   }
 
-  .fy-nav a {
-    color: #000;
+  .header__link {
+    color: #000 !important;
     text-decoration: none;
     font-size: 1rem;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
-    font-weight: 500;
+    letter-spacing: 0.05em;
     transition: opacity 0.25s ease;
   }
 
-  .fy-nav a:hover {
+  .header__link:hover {
     opacity: 0.6;
   }
 
-  /* === LOGO === */
-  .fy-header__logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* --- Logo --- */
+  .header__logo {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .fy-header__logo img {
-    width: clamp(140px, 18vw, 240px);
+  .header__logo img {
+    max-width: 200px;
     height: auto;
-    object-fit: contain;
   }
 
-  /* === ICONS === */
-  .fy-icons {
+  /* --- Icons --- */
+  .header__icons {
     display: flex;
     align-items: center;
     gap: 1.6rem;
   }
 
-  .fy-icons svg {
+  .header__icon svg {
     width: 24px;
     height: 24px;
-    fill: #000 !important; /* fix: override accent color */
+    fill: #000 !important; /* erzwingt schwarze Icons */
     transition: opacity 0.25s ease;
   }
 
-  .fy-icons svg:hover {
+  .header__icon:hover svg {
     opacity: 0.6;
   }
 
-  /* === MOBILE === */
+  /* --- Mobile --- */
   @media (max-width: 768px) {
-    .fy-header__inner {
-      padding: 1rem 1.4rem;
-    }
-    .fy-nav {
+    .header__menu {
       display: none;
     }
-    .fy-header__logo img {
-      width: 160px;
+
+    .header__logo img {
+      max-width: 160px;
     }
   }
 </style>
-
-<section class="section-header">
-  <header class="fy-header">
-    <div class="fy-header__inner">
-
-      <ul class="fy-nav">
-        {% for link in linklists.main-menu.links %}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {% endfor %}
-      </ul>
-
-      <a href="{{ routes.root_url }}" class="fy-header__logo">
-        {% if settings.logo %}
-          {{
-            settings.logo
-            | image_url: width: 600
-            | image_tag:
-              width: 200,
-              alt: shop.name
-          }}
-        {% else %}
-          <span style="color:black;">{{ shop.name }}</span>
-        {% endif %}
-      </a>
-
-      <div class="fy-icons">
-        <a href="{{ routes.search_url }}">
-          <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
-        </a>
-        {% if shop.customer_accounts_enabled %}
-          <a href="{{ routes.account_url }}">
-            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
-          </a>
-        {% endif %}
-        <a href="{{ routes.cart_url }}">
-          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-        </a>
-      </div>
-
-    </div>
-  </header>
-</section>
 
 {% schema %}
 {

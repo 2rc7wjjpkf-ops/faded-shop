@@ -1,33 +1,17 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "hero": {
+    "fy_hero": {
       "type": "faded-youth-hero",
-      "settings": {
-        "desktop_video_url": "https://cdn.shopify.com/videos/c/o/v/646852d06d884d6e988af8f7629106db.mp4",
-        "mobile_video_url": "https://cdn.shopify.com/videos/c/o/v/93b7c4458e9c49729d499191514b2502.mp4",
-        "mobile_scale": 65,
-        "focal_x": 50,
-        "focal_y_desktop": 50,
-        "focal_y_mobile": 50
-      }
+      "settings": {}
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "frontpage",
-        "products_to_show": 4,
-        "title": "faded shades",
-        "heading_size": "h1",
-        "description": "",
+        "collection": "all",
+        "products_to_show": 2,
+        "title": "",
+        "heading_size": "h0",
+        "description": "<p><em>f.youth-prototype_01</em></p>",
         "show_description": false,
         "description_style": "body",
         "columns_desktop": 4,
@@ -35,22 +19,40 @@
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "color_scheme": "",
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
-        "show_secondary_image": false,
+        "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
         "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "color_scheme": "",
+        "newsletter_enable": true,
+        "newsletter_heading": "Abonniere unsere E-Mails",
+        "enable_follow_on_shop": true,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
         "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
   "order": [
-    "hero",
-    "featured_collection"
+    "fy_hero",
+    "featured_collection",
+    "footer"
   ]
 }

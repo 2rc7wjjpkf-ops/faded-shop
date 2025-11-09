@@ -3874,3 +3874,8 @@ body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z
   }
   html, body{ overflow-x:hidden !important; background:#000 !important; }
 }
+.section-header {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}

@@ -3626,3 +3626,251 @@ details-disclosure > details {
   --fy-focal-y-desktop: 50%;
   --fy-focal-y-mobile: 50%;
 }
+
+/* Desktop: echte Mitte + robuste Viewport-Units */
+@media (min-width: 769px){
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
+    transform: none !important;
+    max-width: none !important;
+  }
+}
+
+/* Mobile: alle Shifts/Scales neutralisieren, mittig & randlos */
+@media (max-width: 768px){
+  body:has(.fy-hero-wrap) .fy-hero-wrap{
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    width: 100vw !important;
+  }
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 80vh !important;
+    height: 80svh !important;
+    height: 80dvh !important;
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
+    transform: none !important;
+    max-width: none !important;
+  }
+  html, body{
+    overflow-x: hidden !important;
+    background: #000 !important;
+  }
+}
+
+/* Full-bleed im Editor ohne Padding */
+body:has(.fy-hero-wrap) .page-width:has(.fy-hero-wrap),
+body:has(.fy-hero-wrap) .content-for-index:has(.fy-hero-wrap){
+  max-width: 100vw !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Z-Index-Sicherheit */
+body:has(.fy-hero-wrap) .fy-hero-wrap,
+body:has(.fy-hero-wrap) .fy-hero-video{ z-index: 0 !important; position: relative !important; }
+body:has(.fy-hero-wrap) .header,
+body:has(.fy-hero-wrap) .shopify-section-header{ z-index: 99 !important; position: relative !important; }/* ============================
+   (append-only, nichts oben anfassen)
+   ============================ */
+
+/* 0) Header-Spalt aus header.liquid neutralisieren */
+.section-header { margin-bottom: 0 !important; }
+
+/* 1) Full-bleed ohne Seiteneinzüge, auch im Editor */
+body:has(.fy-hero-wrap) .page-width:has(.fy-hero-wrap),
+body:has(.fy-hero-wrap) .content-for-index:has(.fy-hero-wrap){
+  max-width: 100vw !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) Z-Index-Sicherheit: Header/Drawer über Video */
+body:has(.fy-hero-wrap) .fy-hero-wrap,
+body:has(.fy-hero-wrap) .fy-hero-video{ position:relative !important; z-index:0 !important; }
+body:has(.fy-hero-wrap) .header,
+body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z-index:99 !important; }
+
+/* 3) Fokuspunkte bequem steuerbar */
+:root{
+  --fy-focal-x: 50%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
+  --fy-focal-y-desktop: 50%; /* 45% = etwas höher, 55% = etwas tiefer */
+  --fy-focal-y-mobile: 50%;
+}
+
+/* 4) Desktop: echtes Center + robuste VH-Units */
+@media (min-width: 769px){
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100svh !important;  /* iOS Safari fix */
+    height: 100dvh !important;  /* neuere Browser */
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
+    transform: none !important;
+    max-width: none !important;
+    background:#000 !important;
+  }
+}
+
+/* 5) Mobile: randlos, keine Shifts/Scales, sauber mittig */
+@media (max-width: 768px){
+  body:has(.fy-hero-wrap) .fy-hero-wrap{
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    background:#000 !important;
+  }
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 80vh !important;
+    height: 80svh !important;
+    height: 80dvh !important;
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
+    transform: none !important;
+    max-width: none !important;
+    background:#000 !important;
+  }
+  html, body{ overflow-x:hidden !important; background:#000 !important; }
+}/* ============================
+   (append-only, nichts oben anfassen)
+   ============================ */
+
+/* 0) Header-Spalt aus header.liquid neutralisieren */
+.section-header { margin-bottom: 0 !important; }
+
+/* 1) Full-bleed ohne Seiteneinzüge, auch im Editor */
+body:has(.fy-hero-wrap) .page-width:has(.fy-hero-wrap),
+body:has(.fy-hero-wrap) .content-for-index:has(.fy-hero-wrap){
+  max-width: 100vw !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) Z-Index-Sicherheit: Header/Drawer über Video */
+body:has(.fy-hero-wrap) .fy-hero-wrap,
+body:has(.fy-hero-wrap) .fy-hero-video{ position:relative !important; z-index:0 !important; }
+body:has(.fy-hero-wrap) .header,
+body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z-index:99 !important; }
+
+/* 3) Fokuspunkte bequem steuerbar */
+:root{
+  --fy-focal-x: 50%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
+  --fy-focal-y-desktop: 50%; /* 45% = etwas höher, 55% = etwas tiefer */
+  --fy-focal-y-mobile: 50%;
+}
+
+/* 4) Desktop: echtes Center + robuste VH-Units */
+@media (min-width: 769px){
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100svh !important;  /* iOS Safari fix */
+    height: 100dvh !important;  /* neuere Browser */
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
+    transform: none !important;
+    max-width: none !important;
+    background:#000 !important;
+  }
+}
+
+/* 5) Mobile: randlos, keine Shifts/Scales, sauber mittig */
+@media (max-width: 768px){
+  body:has(.fy-hero-wrap) .fy-hero-wrap{
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    background:#000 !important;
+  }
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 80vh !important;
+    height: 80svh !important;
+    height: 80dvh !important;
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
+    transform: none !important;
+    max-width: none !important;
+    background:#000 !important;
+  }
+  html, body{ overflow-x:hidden !important; background:#000 !important; }
+}
+/* ============================
+   (append-only, nichts oben anfassen)
+   ============================ */
+
+/* 0) Header-Spalt aus header.liquid neutralisieren */
+.section-header { margin-bottom: 0 !important; }
+
+/* 1) Full-bleed ohne Seiteneinzüge, auch im Editor */
+body:has(.fy-hero-wrap) .page-width:has(.fy-hero-wrap),
+body:has(.fy-hero-wrap) .content-for-index:has(.fy-hero-wrap){
+  max-width: 100vw !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 2) Z-Index-Sicherheit: Header/Drawer über Video */
+body:has(.fy-hero-wrap) .fy-hero-wrap,
+body:has(.fy-hero-wrap) .fy-hero-video{ position:relative !important; z-index:0 !important; }
+body:has(.fy-hero-wrap) .header,
+body:has(.fy-hero-wrap) .shopify-section-header{ position:relative !important; z-index:99 !important; }
+
+/* 3) Fokuspunkte bequem steuerbar */
+:root{
+  --fy-focal-x: 50%;         /* 48% = leicht nach links, 52% = leicht nach rechts */
+  --fy-focal-y-desktop: 50%; /* 45% = etwas höher, 55% = etwas tiefer */
+  --fy-focal-y-mobile: 50%;
+}
+
+/* 4) Desktop: echtes Center + robuste VH-Units */
+@media (min-width: 769px){
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100svh !important;  /* iOS Safari fix */
+    height: 100dvh !important;  /* neuere Browser */
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-desktop) !important;
+    transform: none !important;
+    max-width: none !important;
+    background:#000 !important;
+  }
+}
+
+/* 5) Mobile: randlos, keine Shifts/Scales, sauber mittig */
+@media (max-width: 768px){
+  body:has(.fy-hero-wrap) .fy-hero-wrap{
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+    background:#000 !important;
+  }
+  body:has(.fy-hero-wrap) .fy-hero-video{
+    width: 100vw !important;
+    height: 80vh !important;
+    height: 80svh !important;
+    height: 80dvh !important;
+    object-fit: cover !important;
+    object-position: var(--fy-focal-x) var(--fy-focal-y-mobile) !important;
+    transform: none !important;
+    max-width: none !important;
+    background:#000 !important;
+  }
+  html, body{ overflow-x:hidden !important; background:#000 !important; }
+}

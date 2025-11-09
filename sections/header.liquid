@@ -1,6 +1,9 @@
 {% comment %}
-  FADED YOUTH — CLEAN WHITE HEADER (FINAL)
-  Stabil, bündig, kein Transparent, kompatibel mit Hero-Video
+  FADED YOUTH — FINAL WHITE HEADER (STABLE BUILD)
+  - Weißer Sticky Header
+  - Logo zentriert
+  - Menü links, Icons rechts
+  - Schwarze Icons, keine Theme-Akzentfarbe
 {% endcomment %}
 
 <style>
@@ -14,9 +17,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: #ffffff;
-    z-index: 999;
+    background: #fff;
     border-bottom: 1px solid #e5e5e5;
+    z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,16 +29,16 @@
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
-    padding: 1.4rem 3rem;
+    padding: 1.2rem 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  /* NAVIGATION */
+  /* === NAVIGATION === */
   .fy-nav {
     display: flex;
-    gap: 2.4rem;
+    gap: 2.6rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -44,15 +47,18 @@
   .fy-nav a {
     color: #000;
     text-decoration: none;
-    font-size: 0.9rem;
-    letter-spacing: 0.06em;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
+    font-weight: 500;
     transition: opacity 0.25s ease;
   }
 
-  .fy-nav a:hover { opacity: 0.6; }
+  .fy-nav a:hover {
+    opacity: 0.6;
+  }
 
-  /* LOGO */
+  /* === LOGO === */
   .fy-header__logo {
     display: flex;
     align-items: center;
@@ -61,39 +67,47 @@
   }
 
   .fy-header__logo img {
-    width: clamp(130px, 20vw, 240px);
+    width: clamp(140px, 18vw, 240px);
     height: auto;
     object-fit: contain;
   }
 
-  /* ICONS */
+  /* === ICONS === */
   .fy-icons {
     display: flex;
     align-items: center;
-    gap: 1.4rem;
+    gap: 1.6rem;
   }
 
   .fy-icons svg {
-    width: 22px;
-    height: 22px;
-    fill: #000000;
+    width: 24px;
+    height: 24px;
+    fill: #000 !important; /* fix: override accent color */
     transition: opacity 0.25s ease;
   }
 
-  .fy-icons svg:hover { opacity: 0.6; }
+  .fy-icons svg:hover {
+    opacity: 0.6;
+  }
 
+  /* === MOBILE === */
   @media (max-width: 768px) {
     .fy-header__inner {
-      padding: 1rem 1.6rem;
+      padding: 1rem 1.4rem;
     }
-    .fy-nav { display: none; }
-    .fy-header__logo img { width: 160px; }
+    .fy-nav {
+      display: none;
+    }
+    .fy-header__logo img {
+      width: 160px;
+    }
   }
 </style>
 
 <section class="section-header">
   <header class="fy-header">
     <div class="fy-header__inner">
+
       <ul class="fy-nav">
         {% for link in linklists.main-menu.links %}
           <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -127,6 +141,7 @@
           <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
         </a>
       </div>
+
     </div>
   </header>
 </section>

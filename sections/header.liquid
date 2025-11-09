@@ -1,5 +1,6 @@
 {% comment %}
-  FADED YOUTH — Clean Header (centered, black, theme-aligned)
+  FADED YOUTH — CLEAN WHITE HEADER (FINAL)
+  Stabil, bündig, kein Transparent, kompatibel mit Hero-Video
 {% endcomment %}
 
 <style>
@@ -9,12 +10,13 @@
   }
 
   .fy-header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    background: #000; /* kein Blur, sattes Schwarz */
+    background: #ffffff;
     z-index: 999;
+    border-bottom: 1px solid #e5e5e5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +26,7 @@
     width: 100%;
     max-width: 1500px;
     margin: 0 auto;
-    padding: 1.6rem 3rem;
+    padding: 1.4rem 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -40,7 +42,7 @@
   }
 
   .fy-nav a {
-    color: #fff;
+    color: #000;
     text-decoration: none;
     font-size: 0.9rem;
     letter-spacing: 0.06em;
@@ -48,7 +50,7 @@
     transition: opacity 0.25s ease;
   }
 
-  .fy-nav a:hover { opacity: 0.7; }
+  .fy-nav a:hover { opacity: 0.6; }
 
   /* LOGO */
   .fy-header__logo {
@@ -62,7 +64,6 @@
     width: clamp(130px, 20vw, 240px);
     height: auto;
     object-fit: contain;
-    margin: 0 auto;
   }
 
   /* ICONS */
@@ -75,15 +76,15 @@
   .fy-icons svg {
     width: 22px;
     height: 22px;
-    fill: #ffffff;
+    fill: #000000;
     transition: opacity 0.25s ease;
   }
 
-  .fy-icons svg:hover { opacity: 0.7; }
+  .fy-icons svg:hover { opacity: 0.6; }
 
   @media (max-width: 768px) {
     .fy-header__inner {
-      padding: 1.2rem 1.6rem;
+      padding: 1rem 1.6rem;
     }
     .fy-nav { display: none; }
     .fy-header__logo img { width: 160px; }
@@ -109,7 +110,7 @@
               alt: shop.name
           }}
         {% else %}
-          <span style="color:white;">{{ shop.name }}</span>
+          <span style="color:black;">{{ shop.name }}</span>
         {% endif %}
       </a>
 

@@ -24,7 +24,7 @@
         <source src="{{ section.settings.mobile_video_url }}" type="video/mp4" media="(max-width: 768px)">
       {% endif %}
       {% if section.settings.desktop_video_url != blank %}
-        <source src="{{ section.settings.desktop_video_url }}" type="video/mp4">
+        <source src="{{ section.settings.mobile_video_url }}" type="video/mp4">
       {% else %}
         <source src="https://cdn.shopify.com/videos/c/o/v/e4a19337a343467f9380b4a4d6f3add1.mp4" type="video/mp4">
       {% endif %}
@@ -91,6 +91,8 @@
       transform: translate(-50%, -50%) scale(var(--fy-mobile-scale));
       transform-origin: center center;
       object-position: var(--fy-focal-x) var(--fy-focal-y-mobile);
+      min-width: calc(100vw / var(--fy-mobile-scale));
+      min-height: calc(100vh / var(--fy-mobile-scale));
     }
   }
 

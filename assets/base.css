@@ -3780,3 +3780,42 @@ footer.footer,
     align-items: center;
   }
 }
+/* --- FOOTER DESKTOP LAYOUT — ANN DEMEULEMEESTER STYLE --- */
+
+/* Footer breiter wirken lassen */
+.footer__blocks-wrapper {
+    max-width: 1500px !important; /* mehr Breite */
+    margin: 0 auto !important; /* zentriert */
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+}
+
+/* Spalten weiter auseinander */
+.footer-blocks {
+    display: grid !important;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr; /* Newsletter etwas breiter */
+    column-gap: 80px !important; /* Abstand zwischen den Spalten */
+}
+
+/* Newsletter-Feld auch breiter */
+.footer-block--newsletter {
+    max-width: 450px !important;
+}
+
+/* Spalten-Überschriften etwas größer und mit Luft */
+.footer-block__heading {
+    margin-bottom: 20px !important;
+    letter-spacing: 0.12em !important;
+    font-size: 15px !important;
+}
+
+/* Mehr Abstand zwischen Footer und Copyright */
+.footer__content-bottom {
+    margin-top: 50px !important;
+}
+
+/* Copyright optisch dezenter */
+.footer__copyright {
+    opacity: 0.6 !important;
+    font-size: 13px !important;
+}

@@ -3713,3 +3713,70 @@ footer.footer,
   background: #333;
   margin-bottom: 25px;
 }
+/* ================================
+   FADED YOUTH – Footer Refinement
+   ================================ */
+
+/* Mehr Luft im Footer (Luxus-Feeling) */
+footer.footer,
+.footer {
+  padding-top: 80px !important;
+  padding-bottom: 90px !important;
+}
+
+/* Überschriften etwas größer & eleganter */
+.footer .footer-block__heading {
+  font-size: 15px;
+  letter-spacing: 1.4px;
+  margin-bottom: 22px;
+}
+
+/* Links minimal kleiner & enger gesetzt */
+.footer a,
+.footer li,
+.footer p,
+.footer span {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.footer .list-menu__item {
+  margin: 2px 0;
+}
+
+/* Desktop-Layout: drei Spalten mit mehr Abstand, mittig begrenzt */
+@media screen and (min-width: 990px) {
+  .footer__content-top {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 72px;
+    align-items: flex-start;
+  }
+
+  .footer .footer-block {
+    flex: 1 1 auto;
+  }
+}
+
+/* Mobile: alles zentriert, mehr Abstand zwischen Blöcken */
+@media screen and (max-width: 749px) {
+  .footer {
+    text-align: center;
+  }
+
+  .footer .footer-block {
+    margin-bottom: 28px;
+  }
+
+  .footer .footer-block__heading {
+    margin-bottom: 10px;
+  }
+
+  .footer__content-bottom {
+    padding-top: 18px;
+    gap: 4px;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -366,11 +366,18 @@
     </script>
 
     {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+    <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
 
-    {%- if settings.cart_type == 'drawer' -%}
-      <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
-  </body>
+  {%- if settings.cart_type == 'drawer' -%}
+    <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  <!-- FY CTA DEBUG -->
+  <div style="position:fixed;bottom:40px;left:50%;transform:translateX(-50%);
+  background:red;color:white;padding:20px;z-index:999999;">
+    CTA DEBUG VISIBLE
+  </div>
+
+</body>
 </html>

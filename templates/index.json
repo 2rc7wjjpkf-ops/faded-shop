@@ -20,6 +20,13 @@
         "focal_y_mobile": 50
       }
     },
+    "custom_liquid_yEwYxz": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"fy-hero-cta\">\n  <a class=\"fy-hero-cta__btn\" href=\"/products/faded-shades\">SHOP</a>\n</div>"
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -65,6 +72,7 @@
   },
   "order": [
     "fy_hero",
+    "custom_liquid_yEwYxz",
     "featured_collection",
     "footer"
   ]

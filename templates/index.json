@@ -9,13 +9,6 @@
  */
 {
   "sections": {
-    "custom_liquid_yEwYxz": {
-      "type": "custom-liquid",
-      "name": "Custom Liquid",
-      "settings": {
-        "custom_liquid": "<div class=\"fy-hero-overlay-cta\">\n  <a class=\"fy-hero-overlay-cta__btn\" href=\"/products/faded-shades\">Shop</a>\n</div>\n\n<style>\n  /* CTA als Overlay über dem Hero-Video */\n  .fy-hero-overlay-cta{\n    position: relative;\n    height: 0;\n  }\n  /* versucht sich am Hero zu verankern */\n  .fy-hero-overlay-cta__btn{\n    position: absolute;\n    left: 50%;\n    transform: translateX(-50%);\n    top: -140px; /* hoch/runter = hier anpassen */\n    z-index: 9999;\n    border: 1px solid #fff;\n    color: #fff;\n    text-decoration: none;\n    padding: 10px 22px;\n    letter-spacing: .12em;\n    text-transform: uppercase;\n    font-size: 12px;\n    background: transparent;\n  }\n</style>"
-      }
-    },
     "fy_hero": {
       "type": "faded-youth-hero",
       "settings": {
@@ -25,6 +18,13 @@
         "focal_x": 50,
         "focal_y_desktop": 50,
         "focal_y_mobile": 50
+      }
+    },
+    "custom_liquid_yEwYxz": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"fy-hero-cta\">\n  <a href=\"/products/f-youth-prototype-01\">\n    Early Access\n  </a>\n</div>"
       }
     },
     "featured_collection": {

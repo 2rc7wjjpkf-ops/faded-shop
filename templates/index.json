@@ -24,7 +24,7 @@
       "type": "custom-liquid",
       "name": "Custom Liquid",
       "settings": {
-        "custom_liquid": "<div class=\"fy-hero-cta\">\n  <a href=\"/products/f-youth-prototype-01\">\n    Early Access\n  </a>\n</div>"
+        "custom_liquid": ""
       }
     },
     "featured_collection": {

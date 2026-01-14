@@ -11,6 +11,7 @@
   "sections": {
     "fy_hero": {
       "type": "faded-youth-hero",
+      "custom_css": [],
       "settings": {
         "desktop_video_url": "",
         "mobile_video_url": "",
